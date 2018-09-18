@@ -1,0 +1,59 @@
+﻿@model Waka.Models.ChartModel
+@{
+    Layout = null;
+    string canvasId = Guid.NewGuid().ToString();
+    string title = string.Format("{0}月份 项目汇总", DateTime.Now.Month);
+    string xAxisData = Model.GetDataSetsLabel(10);
+    string seriesData = Model.GetDataSetsData();
+}
+
+<div>
+    <h2><strong>@(new HtmlString(title))</strong> ( <a href="/WakaTime/Project">查看所有</a> ) </h2>
+    <!-- 为ECharts准备一个具备大小（宽高）的Dom -->
+    <div id="@canvasId" style="height:500px; margin:0 auto;"></div>
+    <script type="text/javascript">
+        var option = {
+            left: '0', right: '0', top: '0', bottom: '0',
+            color: ['#3398DB'],
+            tooltip: {
+                trigger: 'axis',
+                axisPointer: {            // 坐标轴指示器，坐标轴触发有效
+                    type: 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+                },
+                formatter: function (params) {
+                    var time = Math.floor(params[0].value) + ' 时 ' + Math.floor((params[0].value - Math.floor(params[0].value)) * 60) + ' 分';
+                    return params[0].name + '<br />' + params[0].seriesName + time;
+                }
+            },
+            grid: {
+                left: '3%',
+                right: '4%',
+                bottom: '3%',
+                containLabel: true
+            },
+            xAxis: [
+                {
+                    type: 'category',
+                    data: [@(new HtmlString(xAxisData))],
+                    axisTick: {
+                        alignWithLabel: true
+                    }
+                }
+            ],
+            yAxis: [
+                {
+                    type: 'value'
+                }
+            ],
+            series: [
+                {
+                    name: '累计时长：',
+                    type: 'bar',
+                    barWidth: '60%',
+                    data: [@(new HtmlString(seriesData))]
+                }
+            ]
+        };
+        echarts.init($("#@canvasId")[0], "macarons").setOption(option);
+    </script>
+</div>

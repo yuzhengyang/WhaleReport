@@ -1,0 +1,97 @@
+﻿@{
+    Layout = null;
+    string canvasId = Guid.NewGuid().ToString();
+}
+
+<canvas id="@canvasId"></canvas>
+<script>
+    var randomScalingFactor = function () {
+        return Math.round(Math.random() * 100);
+    };
+    var randomColorFactor = function () {
+        return Math.round(Math.random() * 255);
+    };
+    var randomColor = function (opacity) {
+        return 'rgba(' + randomColorFactor() + ',' + randomColorFactor() + ',' + randomColorFactor() + ',' + (opacity || '.3') + ')';
+    };
+    $(document).ready(function () {
+        var config = {
+            type: 'doughnut',
+            data: {
+                datasets: [{
+                    data: [
+                        randomScalingFactor(),
+                        randomScalingFactor(),
+                        randomScalingFactor(),
+                        randomScalingFactor(),
+                        randomScalingFactor(),
+                    ],
+                    backgroundColor: [
+                        "#F7464A",
+                        "#46BFBD",
+                        "#FDB45C",
+                        "#949FB1",
+                        "#4D5360",
+                    ],
+                    label: 'Dataset 1'
+                }, {
+                    hidden: true,
+                    data: [
+                        randomScalingFactor(),
+                        randomScalingFactor(),
+                        randomScalingFactor(),
+                        randomScalingFactor(),
+                        randomScalingFactor(),
+                    ],
+                    backgroundColor: [
+                        "#F7464A",
+                        "#46BFBD",
+                        "#FDB45C",
+                        "#949FB1",
+                        "#4D5360",
+                    ],
+                    label: 'Dataset 2'
+                }, {
+                    data: [
+                        randomScalingFactor(),
+                        randomScalingFactor(),
+                        randomScalingFactor(),
+                        randomScalingFactor(),
+                        randomScalingFactor(),
+                    ],
+                    backgroundColor: [
+                        "#F7464A",
+                        "#46BFBD",
+                        "#FDB45C",
+                        "#949FB1",
+                        "#4D5360",
+                    ],
+                    label: 'Dataset 3'
+                }],
+                labels: [
+                    "Red",
+                    "Green",
+                    "Yellow",
+                    "Grey",
+                    "Dark Grey"
+                ]
+            },
+            options: {
+                responsive: true,
+                legend: {
+                    position: 'top',
+                },
+                title: {
+                    display: true,
+                    text: 'Chart.js Doughnut Chart'
+                },
+                animation: {
+                    animateScale: true,
+                    animateRotate: true
+                }
+            }
+        };
+        var ctx = $("#@canvasId").get(0).getContext("2d");
+        new Chart(ctx, config);
+    });
+</script>

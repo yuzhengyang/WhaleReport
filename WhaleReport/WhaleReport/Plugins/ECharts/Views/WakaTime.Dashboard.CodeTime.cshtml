@@ -1,0 +1,71 @@
+﻿@model Waka.Models.ChartModel
+@{
+    Layout = null;
+    string canvasId = Guid.NewGuid().ToString();
+    string data = "";
+    for (int i = 0; i < Model.DataSets.Count(); i++)
+    {
+        data += string.Format("[{0}, {1}, {2}, '{3}'],", Model.DataSets[i].XAxis, Model.DataSets[i].YAxis, Model.DataSets[i].Data, Model.DataSets[i].Label);
+    }
+}
+<div id="@canvasId" style="width: 100%;height:600px; margin:0 auto;"></div>
+<script>
+    var option = {
+        xAxis: {
+            min:1,
+            max:@DateTime.DaysInMonth(Model.ChartDate.Year, Model.ChartDate.Month),
+            interval:1,
+            splitLine: {
+                lineStyle: {
+                    type: 'dashed'
+                }
+            }
+        },
+        yAxis: {
+            min:0,
+            max:24,
+            interval:1,
+            splitLine: {
+                lineStyle: {
+                    type: 'dashed'
+                }
+            }
+        },
+        series: [{
+            name: '项目一',
+            data: [@(new HtmlString(data))],
+            type: 'scatter',
+            symbolSize: function (data) {
+                return data[2];
+            },
+            label: {
+                emphasis: {
+                    show: true,
+                    formatter: function (param) {
+                        return param.data[3]+' : '+param.data[2]+' mins';
+                    },
+                    position: 'top'
+                }
+            }
+        },{
+            data: [[0,9,1,'morning'],[@(DateTime.DaysInMonth(Model.ChartDate.Year, Model.ChartDate.Month)+1),9,1,'morning']],
+            type: 'line',
+            symbolSize: function (data) {
+                return data[2];
+            }
+        },{
+            data: [[0,17,1,'afternoon'],[@(DateTime.DaysInMonth(Model.ChartDate.Year, Model.ChartDate.Month)+1),17,1,'afternoon']],
+            type: 'line',
+            symbolSize: function (data) {
+                return data[2];
+            }
+        },{
+            data: [[0,22,1,'night'],[@(DateTime.DaysInMonth(Model.ChartDate.Year, Model.ChartDate.Month)+1),22,1,'night']],
+            type: 'line',
+            symbolSize: function (data) {
+                return data[2];
+            }
+        }]
+    };
+    echarts.init($("#@canvasId").get(0), "infographic").setOption(option);
+</script>

@@ -1,0 +1,56 @@
+﻿@model WhaleReport.Models.ReportDataModels.ReportPageModel
+
+@{
+    ViewBag.Title = "Details";
+    List<WhaleReport.Models.ReportDataModels.ReportOptionTypeModel> ReportOptionTypeList = ViewBag.ReportOptionTypeList;
+}
+
+<div class="row">
+    <div class="col-md-6">
+        <h2>@(Model.Name)</h2>
+        <h4>@(Model.Description)</h4>
+    </div>
+    <div class="col-md-6 text-right" style="padding:20px;">
+        @Html.ActionLink("返回", "Index", null, new { @class = "btn btn-warning" })
+        @*@Html.ActionLink("预览", "Preview", new { id = Model.Id }, new { @class = "btn btn-success" })*@
+        <a class="btn btn-info" href="~/ReportPage/Preview/@(Model.Id)" target="_blank">预览</a>
+        @Html.Partial("AddOption", new WhaleReport.Models.ReportDataModels.ReportOptionModel() { ReportPageModelId = Model.Id })
+    </div>
+</div>
+
+<hr />
+
+@{
+    int row = 1, index = 0;
+    while (index < Model.ReportOptionModels.Count)
+    {
+        <div class="row">
+            @while (index < Model.ReportOptionModels.Count && Model.ReportOptionModels[index].Row == row)
+            {
+                <div class="@(Model.ReportOptionModels[index].ColumnClass)">
+                    <div style="border:3px solid gray;margin:10px;padding:5px;">
+                        <span class="h2"> 📊 </span>
+                        <strong>@(Model.ReportOptionModels[index].Title)</strong>
+                        <span>
+                            （
+                            @(ReportOptionTypeList.FirstOrDefault(x => x.Type == Model.ReportOptionModels[index].Type)?.Name)
+                            ）
+                        </span>
+                        <br />
+                        <br />
+                        <span>@(Model.ReportOptionModels[index].ReportDataSetModel.Name)</span>
+                        <br />
+                        <br />
+                        <span>
+                            @Html.Partial("EditOption", Model.ReportOptionModels[index])
+                            @Html.Partial("DeleteOption", Model.ReportOptionModels[index])
+                        </span>
+                    </div>
+                </div>
+
+                index++;
+            }
+        </div>
+        row++;
+    }
+}

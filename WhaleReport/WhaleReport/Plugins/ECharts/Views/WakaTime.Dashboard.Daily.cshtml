@@ -1,0 +1,36 @@
+﻿@model Waka.Models.ChartModel
+@{
+    Layout = null;
+    string canvasId = Guid.NewGuid().ToString();
+    string title = (int)(Model.DataSets[1].Data / 60 / 60) + "h " + (int)(Model.DataSets[1].Data / 60 % 60) + "m";
+    string dailyAverage = (int)(Model.DataSets[0].Data / 60 / 60) + "h " + (int)(Model.DataSets[0].Data / 60 % 60) + "m";
+    Model.DataSets[1].Data = Math.Round(Model.DataSets[1].Data / Model.DataSets[0].Data * 100, 2);//达成率（百分比）
+    Model.DataSets[0].Data = Model.DataSets[1].Data >= 100 ? 0 : Math.Round(100 - Model.DataSets[1].Data, 2);//未达成（百分比）
+}
+<div>
+    <h2><strong> 今天 </strong> @(new HtmlString(title)) (7D:@(new HtmlString(dailyAverage)))</h2>
+    <!-- 为ECharts准备一个具备大小（宽高）的Dom -->
+    <div id="@canvasId" style="height:500px; margin:0 auto;"></div>
+    <script type="text/javascript">
+        var option = {
+            tooltip: {
+                formatter: "{a} <br/>{b} : {c}%"
+            },
+            series: [{
+                name: '程序时间',
+                type: 'gauge',
+                detail: { formatter: '{value}%' },
+                data: [{ value: @Model.DataSets[1].Data, name: '达成率' }],
+                axisLine: {            // 坐标轴线
+                    lineStyle: {       // 属性lineStyle控制线条样式
+                        color: [[0.2, '#c12e34'], [0.6, '#e6b600'], [0.8, '#005eaa'], [1, '#2b8210']],
+                        width: 15,
+                    }
+                },
+                splitLine: { length :25 },//分割线长度
+                pointer: { length:'80%', width:10 },//指针长度
+            }]
+        };
+        echarts.init($("#@canvasId").get(0), "shine").setOption(option);
+    </script>
+</div>

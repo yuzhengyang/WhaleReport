@@ -1,0 +1,69 @@
+﻿@model Waka.Models.ChartModel
+@{
+    Layout = null;
+    string canvasId = Guid.NewGuid().ToString();
+    string xAxis = Model.GetLabels();
+    string legend = Model.GetDataSetsLabel();
+    string series = "";
+    for (int i = 0; i < Model.DataSets.Count(); i++)
+    {
+        series += string.Format("{{name: '{0}',type: 'bar',stack: 'Activity',data: [{1}]}},", Model.DataSets[i].Label, Model.DataSets[i].GetDatas());
+    }
+}
+<style>
+    .activity-monthly-table th, td {
+        /*padding 上 右 下 左*/
+        padding: 2px 6px 2px 6px;
+    }
+</style>
+<div id="@canvasId" style="width: 90%;height:500px; margin:0 auto;"></div>
+<script>
+    var option = {
+        tooltip: {
+            trigger: 'axis',
+            backgroundColor: 'rgba(50,50,50,0.9)',
+            axisPointer: {            // 坐标轴指示器，坐标轴触发有效
+                type: 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+            },
+            formatter: function (params) {
+                var tableHead = "<table class='activity-monthly-table' border='1'>";
+                var tableBody = "";
+                var tableFoot = "</table>";
+                tableHead += "<tr><th colspan='2' class='text-center'>" + params[0].name + "</th></tr>";
+                var sum = 0;
+                for (var i = params.length - 1; i >= 0; i--) {
+                    if (params[i].value > 0) {
+                        sum += params[i].value;
+                        var time = Math.floor(params[i].value) + ' 时 ' + Math.floor((params[i].value - Math.floor(params[i].value)) * 60) + ' 分';
+                        tableBody += "<tr><td><span style='color:" + params[i].color + ";'> █ </span>" + params[i].seriesName + "</td><td>" + time + "</td></tr>";
+                    }
+                }
+                var summary = Math.floor(sum) + ' 时 ' + Math.floor((sum - Math.floor(sum)) * 60) + ' 分';
+                tableHead += "<tr><th>总计</th><th>" + summary + "</th></tr>";
+                return tableHead + tableBody + tableFoot;
+            }
+        },
+        legend: {
+            data: [@(new HtmlString(legend))]
+        },
+        grid: {
+            left: '3%',
+            right: '4%',
+            bottom: '3%',
+            containLabel: true
+        },
+        xAxis: [
+            {
+                type: 'category',
+                data: [@(new HtmlString(xAxis))]
+            }
+        ],
+        yAxis: [
+            {
+                type: 'value'
+            }
+        ],
+        series: [@(new HtmlString(series))]
+    };
+    echarts.init($("#@canvasId").get(0), "infographic").setOption(option);
+</script>

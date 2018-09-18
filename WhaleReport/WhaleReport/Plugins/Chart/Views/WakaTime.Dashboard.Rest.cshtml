@@ -1,0 +1,97 @@
+﻿@model Waka.Plugin.Chart.Model.ChartModel
+@{
+    Layout = null;
+    string canvasId = Guid.NewGuid().ToString();
+    string labels = Model.GetDataSetsLabel();
+    string datas = Model.GetDataSetsData();
+    string colors = Model.GetDataSetsColor();
+    string month = string.Format("{0}月", Model.ChartDate.Month);
+}
+
+<div style="width: 90%;margin:0 auto;">
+    <canvas id="@canvasId"></canvas>
+</div>
+
+<script>
+    $(document).ready(function () {
+        var config = {
+            type: 'bar',
+            data: {
+                datasets: [{
+                    data: [@(new HtmlString(datas))],
+                    backgroundColor: randomColor(),
+                }],
+                labels: [@(new HtmlString(labels))]
+            },
+            options: {
+                responsive: true,
+                legend: {
+                    display: false,
+                    position: "bottom",
+                },
+                title: {
+                    display: false,
+                    text: 'Chart.js Line Chart'
+                },
+                tooltips: {
+                    enabled: true,
+                    mode: 'label',
+                    callbacks: {
+                        title: function (tooltipItems, data) {
+                            // Pick first xLabel for now
+                            var title = '';
+                            var labels = data.labels;
+                            var labelCount = labels ? labels.length : 0;
+
+                            if (tooltipItems.length > 0) {
+                                var item = tooltipItems[0];
+
+                                if (item.xLabel) {
+                                    title = item.xLabel;
+                                } else if (labelCount > 0 && item.index < labelCount) {
+                                    title = labels[item.index];
+                                }
+                            }
+                            return '@month' + title;
+                        },
+                        label: function (tooltipItem, data) {
+                            var offHour = Math.floor(tooltipItem.yLabel);
+                            var offMinute = Math.floor((tooltipItem.yLabel - Math.floor(tooltipItem.yLabel)) * 60);
+                            var overHour = Math.floor(tooltipItem.yLabel);
+                            var overMinute = Math.floor((tooltipItem.yLabel - Math.floor(tooltipItem.yLabel)) * 60);
+                            if (22 + offHour - 24 >= 0) offHour = 22 + offHour - 24; else offHour = 22 + offHour;
+                            return '离线时间：' + offHour + '时' + offMinute + '分' +
+                                '(超时：' + overHour + '时' + overMinute + '分)';
+                        },
+                    }
+                },
+                hover: {
+                    mode: 'dataset'
+                },
+                scales: {
+                    xAxes: [{
+                        display: true,
+                        scaleLabel: {
+                            show: true,
+                            labelString: 'Month'
+                        }
+                    }],
+                    yAxes: [{
+                        display: true,
+                        scaleLabel: {
+                            show: true,
+                            labelString: ''
+                        },
+                        ticks: {
+                            beginAtZero: true,
+                            minRotation: 0,
+                            maxRotation: 2,
+                        }
+                    }]
+                }
+            }
+        };
+        var ctx = $("#@canvasId").get(0).getContext("2d");
+        new Chart(ctx, config);
+    });
+</script>

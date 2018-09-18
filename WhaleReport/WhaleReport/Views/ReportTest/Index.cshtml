@@ -1,0 +1,16 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    WhaleReport.Models.ReportDataModels.ReportModel report = ViewBag.Report;
+    int i = 0;
+}
+
+<h2>Index</h2>
+
+<div>
+    @Html.Partial(report != null ? report.ReportOptionModel.Type : "ECharts.Null", report)
+</div>
+
+<div>
+    @Html.Partial(report != null ? "ECharts.BarSimple" : "ECharts.Null", report)
+</div>

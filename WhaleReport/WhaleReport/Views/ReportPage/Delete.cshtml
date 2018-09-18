@@ -1,0 +1,58 @@
+﻿@model WhaleReport.Models.ReportDataModels.ReportPageModel
+
+<!-- 按钮触发模态框 -->
+<button class="btn btn-danger btn-xs" data-toggle="modal" data-target="@(new HtmlString($"#deleteModal{Model.Id}"))">
+    删除
+</button>
+<!-- 模态框（Modal） -->
+<div class="modal fade" id="@(new HtmlString($"deleteModal{Model.Id}"))" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+                <h4 class="modal-title" id="myModalLabel">
+                    确认要删除该项吗？
+                </h4>
+            </div>
+            <div class="modal-body">
+                <div>
+                    <dl class="dl-horizontal">
+                        <dt>
+                            @Html.DisplayNameFor(model => model.Name)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.Name)
+                        </dd>
+
+                        <dt>
+                            @Html.DisplayNameFor(model => model.Description)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.Description)
+                        </dd>
+                    </dl>
+                </div>
+            </div>
+            <div class="modal-footer">
+                @*<button type="button" class="btn btn-danger">
+                        删除
+                    </button>*@
+                @using (Html.BeginForm("Delete", "ReportPage"))
+                {
+                    @Html.AntiForgeryToken()
+
+                    <input type="hidden" name="id" value="@Model.Id.ToString()" />
+                    <div class="form-actions no-color">
+                        <input type="submit" value="删除" class="btn btn-danger" />
+
+                        <input type="button" class="btn btn-primary" data-dismiss="modal" value="关闭" />
+                    </div>
+                }
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal -->
+</div>

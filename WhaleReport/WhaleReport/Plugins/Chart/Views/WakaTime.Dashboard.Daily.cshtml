@@ -1,0 +1,84 @@
+﻿@model Waka.Plugin.Chart.Model.ChartModel
+@{
+    Layout = null;
+    string canvasId = Guid.NewGuid().ToString();
+    string title = (int)(Model.DataSets[1].Data / 60 / 60) + " hrs " + (int)(Model.DataSets[1].Data / 60 % 60) + " mins";
+    string dailyAverage = (int)(Model.DataSets[0].Data / 60 / 60) + " hrs " + (int)(Model.DataSets[0].Data / 60 % 60) + " mins";
+    Model.DataSets[1].Data = Math.Round(Model.DataSets[1].Data / Model.DataSets[0].Data * 100, 2);
+    Model.DataSets[0].Data = Model.DataSets[1].Data >= 100 ? 0 : Math.Round(100 - Model.DataSets[1].Data, 2);
+    Model.DataSets[0].Label = "未达成 : " + Model.DataSets[0].Data + " %";
+    Model.DataSets[1].Label = "今日完成 : " + Model.DataSets[1].Data + " %";
+    Model.DataSets[0].Color = "#F7464A";
+    Model.DataSets[1].Color = Model.DataSets[1].Data >= 90 ? "#46F74A" : "#FDB45C";
+    string labels = Model.GetDataSetsLabel();
+    string datas = Model.GetDataSetsData();
+    string colors = Model.GetDataSetsColor();
+}
+<div>
+    <h2><strong> 今天 </strong> @(new HtmlString(title)) (@(new HtmlString(Model.DataSets[1].Data + " %")))</h2>
+    <div style="width: 70%;margin:0 auto;">
+        <canvas id="@canvasId"></canvas>
+    </div>
+    <div class="col-lg-12 text-center">
+        <h4>@(new HtmlString(Model.DataSets[1].Data < 100 ? Model.DataSets[0].Data + " % Decrease" : Math.Round(Model.DataSets[1].Data - 100, 2) + " % Increase"))</h4>
+        <h4><strong> 七日平均 </strong> @(new HtmlString(dailyAverage))</h4>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        var config = {
+            type: 'doughnut',
+            data: {
+                datasets: [{
+                    backgroundColor: [@(new HtmlString(colors))],
+                    data: [@(new HtmlString(datas))],
+                    label: 'Dataset 1'
+                }],
+                labels: [@(new HtmlString(labels))]
+            },
+            options: {
+                responsive: true,
+                legend: {
+                    display: false,
+                    position: 'top',
+                },
+                title: {
+                    display: false,
+                    text: '@(new HtmlString(title))'
+                },
+                tooltips: {
+                    enabled: true,
+                    titleMarginBottom: 0,
+                    callbacks: {
+                        title: function (tooltipItems, data) {
+                            var title = '';
+                            var labels = data.labels;
+                            var labelCount = labels ? labels.length : 0;
+
+                            if (tooltipItems.length > 0) {
+                                var item = tooltipItems[0];
+
+                                if (item.xLabel) {
+                                    title = item.xLabel;
+                                } else if (labelCount > 0 && item.index < labelCount) {
+                                    title = labels[item.index];
+                                }
+                            }
+                            return title;
+                        },
+                        label: function (tooltipItem, data) {
+                            return;
+                        },
+                    },
+                },
+                animation: {
+                    animateScale: true,
+                    animateRotate: true
+                }
+            }
+        };
+        var ctx = $("#@canvasId").get(0).getContext("2d");
+        new Chart(ctx, config);
+    });
+</script>

@@ -1,0 +1,41 @@
+﻿@model WhaleReport.Models.ReportDataModels.ReportOptionModel
+
+<!-- 按钮触发模态框 -->
+<button class="btn btn-danger btn-xs" data-toggle="modal" data-target="@(new HtmlString($"#deleteOptionModal{Model.Id}"))">
+    删除
+</button>
+<!-- 模态框（Modal） -->
+<div class="modal fade" id="@(new HtmlString($"deleteOptionModal{Model.Id}"))" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+                <h4 class="modal-title" id="myModalLabel">
+                    删除图表
+                </h4>
+            </div>
+            <div class="modal-body">
+                <div>
+                    <span class="h4">确认要删除</span>
+                    <span class="h4"><strong> @Model.Title </strong></span>
+                    <span class="h4">吗？</span>
+                </div>
+            </div>
+            <div class="modal-footer">
+                @using (Html.BeginForm("DeleteOption", "ReportPage"))
+                {
+                    @Html.AntiForgeryToken()
+
+                    <input type="hidden" name="id" value="@Model.Id.ToString()" />
+                    <div class="form-actions no-color">
+                        <input type="submit" value="删除" class="btn btn-danger" />
+
+                        <input type="button" class="btn btn-primary" data-dismiss="modal" value="关闭" />
+                    </div>
+                }
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal -->
+</div>

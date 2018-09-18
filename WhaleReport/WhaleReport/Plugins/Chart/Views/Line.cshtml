@@ -1,0 +1,107 @@
+﻿@{
+    Layout = null;
+    string canvasId = Guid.NewGuid().ToString();
+}
+
+<canvas id="@canvasId"></canvas>
+<script>
+    var MONTHS = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"];
+    var randomScalingFactor = function () {
+        return Math.round(Math.random() * 1000);
+    };
+    var randomColorFactor = function () {
+        return Math.round(Math.random() * 255);
+    };
+    var randomColor = function (opacity) {
+        return 'rgba(' + randomColorFactor() + ',' + randomColorFactor() + ',' + randomColorFactor() + ',' + (opacity || '.3') + ')';
+    };
+    $(document).ready(function () {
+        var config = {
+            type: 'line',
+            data: {
+                labels: ["1", "2", "3", "4", "5", "6", "7"],
+                datasets: [{
+                    label: "My First dataset",
+                    data: [randomScalingFactor(), randomScalingFactor(), randomScalingFactor(), randomScalingFactor(), randomScalingFactor(), randomScalingFactor(), randomScalingFactor()],
+                    fill: false,
+                    borderDash: [5, 5],
+                }, {
+                    hidden: true,
+                    label: 'hidden dataset',
+                    data: [randomScalingFactor(), randomScalingFactor(), randomScalingFactor(), randomScalingFactor(), randomScalingFactor(), randomScalingFactor(), randomScalingFactor()],
+                }, {
+                    label: "My Second dataset",
+                    data: [randomScalingFactor(), randomScalingFactor(), randomScalingFactor(), randomScalingFactor(), randomScalingFactor(), randomScalingFactor(), randomScalingFactor()],
+                }]
+            },
+            options: {
+                responsive: true,
+                legend: {
+                    position: "bottom",
+                },
+                title: {
+                    display: true,
+                    text: 'Chart.js Line Chart'
+                },
+                tooltips: {
+                    mode: 'label',
+                    callbacks: {
+                        beforeTitle: function () {
+                            return '...beforeTitle';
+                        },
+                        afterTitle: function () {
+                            return '...afterTitle';
+                        },
+                        beforeBody: function () {
+                            return '...beforeBody';
+                        },
+                        afterBody: function () {
+                            return '...afterBody';
+                        },
+                        beforeFooter: function () {
+                            return '...beforeFooter';
+                        },
+                        footer: function () {
+                            return 'Footer';
+                        },
+                        afterFooter: function () {
+                            return '...afterFooter';
+                        },
+                    }
+                },
+                hover: {
+                    mode: 'dataset'
+                },
+                scales: {
+                    xAxes: [{
+                        display: true,
+                        scaleLabel: {
+                            show: true,
+                            labelString: 'Month'
+                        }
+                    }],
+                    yAxes: [{
+                        display: true,
+                        scaleLabel: {
+                            show: true,
+                            labelString: 'Value'
+                        },
+                        ticks: {
+                            suggestedMin: -10,
+                            suggestedMax: 250,
+                        }
+                    }]
+                }
+            }
+        };
+        $.each(config.data.datasets, function (i, dataset) {
+            dataset.borderColor = randomColor(0.4);
+            dataset.backgroundColor = randomColor(0.5);
+            dataset.pointBorderColor = randomColor(0.7);
+            dataset.pointBackgroundColor = randomColor(0.5);
+            dataset.pointBorderWidth = 1;
+        });
+        var ctx = $("#@canvasId").get(0).getContext("2d");
+        new Chart(ctx, config);
+    });
+</script>

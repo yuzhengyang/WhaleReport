@@ -1,0 +1,62 @@
+﻿@model WhaleReport.Models.ReportDataModels.ReportModel
+@{
+    Layout = null;
+    string canvasId = "e" + Model.ReportOptionModel.Id.ToString("N");
+
+    //自定义选择列
+    string[] dimensions = null;
+    if (Model.ReportOptionModel.Dimensions != null && Model.ReportOptionModel.Dimensions != "")
+    { dimensions = Model.ReportOptionModel.DimensionsList; }
+    else { dimensions = Model.Columns(); }
+
+    //自定义选择列图类型
+    string series = "";
+    if (Model.ReportOptionModel.SeriesType != null && Model.ReportOptionModel.SeriesType != "")
+    {
+        foreach (var item in Model.ReportOptionModel.SeriesTypeList)
+        { series += $"{{ type: '{item}' }},"; }
+    }
+    else
+    {
+        for (int i = 1; i < dimensions.Length; i++)
+        { { series += "{ type: 'line' },"; } }
+    }
+}
+<script src="~/Plugins/ECharts/Core/echarts.min.js"></script>
+<script src="~/Plugins/ECharts/Core/theme/infographic.js"></script>
+<script src="~/Plugins/ECharts/Core/theme/shine.js"></script>
+<script src="~/Plugins/ECharts/Core/theme/macarons.js"></script>
+
+<style>
+    .activity-table th, td {
+        /*padding 上 右 下 左*/
+        padding: 2px 6px 2px 6px;
+    }
+</style>
+<div class="text-center">
+    <h2><strong>@(new HtmlString(Model.ReportOptionModel.Title))</strong></h2>
+    <!-- 为ECharts准备一个具备大小（宽高）的Dom -->
+    <div id="@canvasId" style="width: 90%;height:@(Model.ReportOptionModel.Height)px; margin:0 auto;"></div>
+    <script type="text/javascript">
+        var option = {
+            legend: {},
+            tooltip: {},
+            dataset: {
+                dimensions:  @(new HtmlString(Json.Encode(dimensions))),
+                source: @(new HtmlString(Model.DataTableJson()))
+            },
+            // 声明一个 X 轴，类目轴（category）。默认情况下，类目轴对应到 dataset 第一列。
+            xAxis: { type: 'category' },
+            // 声明一个 Y 轴，数值轴。
+            yAxis: {},
+            // 声明多个 bar 系列，默认情况下，每个系列会自动对应到 dataset 的每一列。
+            series: [
+                @(new HtmlString(series))
+            ]
+        };
+        var @(canvasId) = echarts.init($("#@canvasId").get(0), "shine");
+        @(canvasId).setOption(option);
+
+        window.addEventListener('resize', () => @(canvasId).resize(), false);
+    </script>
+</div>

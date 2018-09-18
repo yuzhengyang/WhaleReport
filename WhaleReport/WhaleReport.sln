@@ -1,0 +1,58 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27004.2005
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WhaleReport", "WhaleReport\WhaleReport.csproj", "{0D40920F-9D0B-40A2-A17B-57CA6C87CA3E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WhaleReport.Tests", "WhaleReport.Tests\WhaleReport.Tests.csproj", "{736D6672-0CC8-43BF-8F08-F0287374E894}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "数据模型", "数据模型", "{C30DC519-241F-446F-A029-B79C6D20CBEF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WhaleReport.Models", "WhaleReport.Models\WhaleReport.Models.csproj", "{31075607-84E0-435D-8D0C-C4CFCFEFA8D6}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "私有工具类", "私有工具类", "{963EE54C-B94D-495A-A2DD-FB8EFB5D122C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WhaleReport.MainDB", "WhaleReport.Utils\WhaleReport.MainDB\WhaleReport.MainDB.csproj", "{1159019E-9B69-4DF7-AF49-A5F1D9A35C4A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WhaleReport.ReportDB", "WhaleReport.Utils\WhaleReport.ReportDB\WhaleReport.ReportDB.csproj", "{9F9F7BEF-266F-4ECC-ACB1-56CF54255270}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{0D40920F-9D0B-40A2-A17B-57CA6C87CA3E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0D40920F-9D0B-40A2-A17B-57CA6C87CA3E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0D40920F-9D0B-40A2-A17B-57CA6C87CA3E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0D40920F-9D0B-40A2-A17B-57CA6C87CA3E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{736D6672-0CC8-43BF-8F08-F0287374E894}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{736D6672-0CC8-43BF-8F08-F0287374E894}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{736D6672-0CC8-43BF-8F08-F0287374E894}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{736D6672-0CC8-43BF-8F08-F0287374E894}.Release|Any CPU.Build.0 = Release|Any CPU
+		{31075607-84E0-435D-8D0C-C4CFCFEFA8D6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{31075607-84E0-435D-8D0C-C4CFCFEFA8D6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{31075607-84E0-435D-8D0C-C4CFCFEFA8D6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{31075607-84E0-435D-8D0C-C4CFCFEFA8D6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1159019E-9B69-4DF7-AF49-A5F1D9A35C4A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1159019E-9B69-4DF7-AF49-A5F1D9A35C4A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1159019E-9B69-4DF7-AF49-A5F1D9A35C4A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1159019E-9B69-4DF7-AF49-A5F1D9A35C4A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9F9F7BEF-266F-4ECC-ACB1-56CF54255270}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9F9F7BEF-266F-4ECC-ACB1-56CF54255270}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9F9F7BEF-266F-4ECC-ACB1-56CF54255270}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9F9F7BEF-266F-4ECC-ACB1-56CF54255270}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{31075607-84E0-435D-8D0C-C4CFCFEFA8D6} = {C30DC519-241F-446F-A029-B79C6D20CBEF}
+		{1159019E-9B69-4DF7-AF49-A5F1D9A35C4A} = {963EE54C-B94D-495A-A2DD-FB8EFB5D122C}
+		{9F9F7BEF-266F-4ECC-ACB1-56CF54255270} = {963EE54C-B94D-495A-A2DD-FB8EFB5D122C}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {06766185-227A-4ED7-B66E-158E73B2EC79}
+	EndGlobalSection
+EndGlobal

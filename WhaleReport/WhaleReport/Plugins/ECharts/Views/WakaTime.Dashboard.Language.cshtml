@@ -1,0 +1,47 @@
+﻿@model Waka.Models.ChartModel
+@{
+    Layout = null;
+    string canvasId = Guid.NewGuid().ToString();
+    string labels = Model.GetDataSetsLabel();
+    string seriesData = "";
+    for (int i = 0; i < Model.DataSets.Count(); i++)
+    {
+        seriesData += string.Format("{{ value: {0}, name: '{1}' }},", Model.DataSets[i].Data, Model.DataSets[i].Label);
+    }
+}
+
+<div>
+    <h2><strong> 最常用编程语言 </strong></h2>
+    <!-- 为ECharts准备一个具备大小（宽高）的Dom -->
+    <div id="@canvasId" style="width: 100%;height:500px; margin:0 auto;"></div>
+    <script type="text/javascript">
+        option = {
+            tooltip: {
+                trigger: 'item',
+                formatter: "{a}<br/>{b}"
+            },
+            legend: {
+                orient: 'vertical',
+                right: 'right',
+                data: [@(new HtmlString(labels))]
+            },
+            series: [
+                {
+                    name: '编程语言',
+                    type: 'pie',
+                    radius: '55%',
+                    center: ['50%', '60%'],
+                    data: [@(new HtmlString(seriesData))],
+                    itemStyle: {
+                        emphasis: {
+                            shadowBlur: 10,
+                            shadowOffsetX: 0,
+                            shadowColor: 'rgba(0, 0, 0, 0.5)'
+                        }
+                    }
+                }
+            ]
+        };
+        echarts.init($("#@canvasId").get(0), "shine").setOption(option);
+    </script>
+</div> 

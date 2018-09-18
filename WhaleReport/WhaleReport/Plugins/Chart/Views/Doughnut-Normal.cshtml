@@ -1,0 +1,47 @@
+﻿@model Waka.Plugin.Chart.Model.ChartModel
+@{
+    Layout = null;
+    string canvasId = Guid.NewGuid().ToString();
+    string labels = Model.GetLabels();
+    string datas = Model.GetDatas();
+    string colors = "";
+    for (int i = 0; i < Model.DataSets.Count; i++)
+    { colors += "randomColor(),"; }
+}
+
+<canvas id="@canvasId"></canvas>
+<script>
+    var randomScalingFactor = function () {
+        return Math.round(Math.random() * 100);
+    };
+    $(document).ready(function () {
+        var config = {
+            type: 'doughnut',
+            data: {
+                datasets: [{
+                    backgroundColor: [@(new HtmlString(colors))],
+                    data: [@(new HtmlString(datas))],
+                    label: 'Dataset 1'
+                }],
+                labels: [@(new HtmlString(labels))]
+            },
+            options: {
+                responsive: true,
+                legend: {
+                    display: false,
+                    position: 'top',
+                },
+                title: {
+                    display: false,
+                    text: 'Chart.js Doughnut Chart'
+                },
+                animation: {
+                    animateScale: true,
+                    animateRotate: true
+                }
+            }
+        };
+        var ctx = $("#@canvasId").get(0).getContext("2d");
+        new Chart(ctx, config);
+    });
+</script>

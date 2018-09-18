@@ -1,0 +1,872 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.7\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.7\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
+  <Import Project="..\packages\Microsoft.Net.Compilers.2.1.0\build\Microsoft.Net.Compilers.props" Condition="Exists('..\packages\Microsoft.Net.Compilers.2.1.0\build\Microsoft.Net.Compilers.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{0D40920F-9D0B-40A2-A17B-57CA6C87CA3E}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>WhaleReport</RootNamespace>
+    <AssemblyName>WhaleReport</AssemblyName>
+    <TargetFrameworkVersion>v4.7</TargetFrameworkVersion>
+    <MvcBuildViews>false</MvcBuildViews>
+    <UseIISExpress>true</UseIISExpress>
+    <Use64BitIISExpress />
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Azylee.Core, Version=1.0.0.3, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Azylee.Core.1.0.0.3\lib\Azylee.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.7\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.11.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Abstractions" />
+    <Reference Include="System.Web.Routing" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http">
+    </Reference>
+    <Reference Include="System.Net.Http.WebRequest">
+    </Reference>
+    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.3\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Optimization">
+      <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.1.1.3\lib\net40\System.Web.Optimization.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.3\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="WebGrease">
+      <Private>True</Private>
+      <HintPath>..\packages\WebGrease.1.5.2\lib\WebGrease.dll</HintPath>
+    </Reference>
+    <Reference Include="Antlr3.Runtime">
+      <Private>True</Private>
+      <HintPath>..\packages\Antlr.3.4.1.9004\lib\Antlr3.Runtime.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.Core">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.Core.2.2.1\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.Owin">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.Owin.2.2.1\lib\net45\Microsoft.AspNet.Identity.Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.EntityFramework">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.EntityFramework.2.2.1\lib\net45\Microsoft.AspNet.Identity.EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="Owin">
+      <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin">
+      <HintPath>..\packages\Microsoft.Owin.3.0.1\lib\net45\Microsoft.Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Host.SystemWeb">
+      <HintPath>..\packages\Microsoft.Owin.Host.SystemWeb.3.0.1\lib\net45\Microsoft.Owin.Host.SystemWeb.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security">
+      <HintPath>..\packages\Microsoft.Owin.Security.3.0.1\lib\net45\Microsoft.Owin.Security.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.Facebook">
+      <HintPath>..\packages\Microsoft.Owin.Security.Facebook.3.0.1\lib\net45\Microsoft.Owin.Security.Facebook.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.Cookies">
+      <HintPath>..\packages\Microsoft.Owin.Security.Cookies.3.0.1\lib\net45\Microsoft.Owin.Security.Cookies.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.OAuth">
+      <HintPath>..\packages\Microsoft.Owin.Security.OAuth.3.0.1\lib\net45\Microsoft.Owin.Security.OAuth.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.Google">
+      <HintPath>..\packages\Microsoft.Owin.Security.Google.3.0.1\lib\net45\Microsoft.Owin.Security.Google.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.Twitter">
+      <HintPath>..\packages\Microsoft.Owin.Security.Twitter.3.0.1\lib\net45\Microsoft.Owin.Security.Twitter.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.MicrosoftAccount">
+      <HintPath>..\packages\Microsoft.Owin.Security.MicrosoftAccount.3.0.1\lib\net45\Microsoft.Owin.Security.MicrosoftAccount.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ApplicationInsights">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.2.2.0\lib\net45\Microsoft.ApplicationInsights.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AI.Agent.Intercept">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.Agent.Intercept.2.0.6\lib\net45\Microsoft.AI.Agent.Intercept.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AI.DependencyCollector">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.DependencyCollector.2.2.0\lib\net45\Microsoft.AI.DependencyCollector.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AI.PerfCounterCollector">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.PerfCounterCollector.2.2.0\lib\net45\Microsoft.AI.PerfCounterCollector.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AI.ServerTelemetryChannel">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.WindowsServer.TelemetryChannel.2.2.0\lib\net45\Microsoft.AI.ServerTelemetryChannel.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AI.WindowsServer">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.WindowsServer.2.2.0\lib\net45\Microsoft.AI.WindowsServer.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AI.Web">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.Web.2.2.0\lib\net45\Microsoft.AI.Web.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App_Start\BundleConfig.cs" />
+    <Compile Include="App_Start\FilterConfig.cs" />
+    <Compile Include="App_Start\IdentityConfig.cs" />
+    <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\ReportPageController.cs" />
+    <Compile Include="Controllers\ReportTestController.cs" />
+    <Compile Include="Controllers\ReportDataSetController.cs" />
+    <Compile Include="Controllers\ReportDataSourceController.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Modules\AuthorizeModule\Authorize.cs" />
+    <Compile Include="Modules\ViewEngineModule\ReportViewEngine.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Startup.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\bootstrap-theme.css" />
+    <Content Include="Content\bootstrap-theme.min.css" />
+    <Content Include="Content\bootstrap.css" />
+    <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\BootstrapTheme\Cameo.min.css" />
+    <Content Include="Content\BootstrapTheme\Default.min.css" />
+    <Content Include="Content\BootstrapTheme\Cerulean.min.css" />
+    <Content Include="Content\BootstrapTheme\Cerulean.png" />
+    <Content Include="Content\BootstrapTheme\Cosmo.min.css" />
+    <Content Include="Content\BootstrapTheme\Cosmo.png" />
+    <Content Include="Content\BootstrapTheme\Cyborg.min.css" />
+    <Content Include="Content\BootstrapTheme\Cyborg.png" />
+    <Content Include="Content\BootstrapTheme\Darkly.min.css" />
+    <Content Include="Content\BootstrapTheme\Darkly.png" />
+    <Content Include="Content\BootstrapTheme\Flatly.min.css" />
+    <Content Include="Content\BootstrapTheme\Flatly.png" />
+    <Content Include="Content\BootstrapTheme\Journal.min.css" />
+    <Content Include="Content\BootstrapTheme\Journal.png" />
+    <Content Include="Content\BootstrapTheme\Lumen.min.css" />
+    <Content Include="Content\BootstrapTheme\Lumen.png" />
+    <Content Include="Content\BootstrapTheme\Paper.min.css" />
+    <Content Include="Content\BootstrapTheme\Paper.png" />
+    <Content Include="Content\BootstrapTheme\Readable.min.css" />
+    <Content Include="Content\BootstrapTheme\Readable.png" />
+    <Content Include="Content\BootstrapTheme\Sandstone.min.css" />
+    <Content Include="Content\BootstrapTheme\Sandstone.png" />
+    <Content Include="Content\BootstrapTheme\Simplex.min.css" />
+    <Content Include="Content\BootstrapTheme\Simplex.png" />
+    <Content Include="Content\BootstrapTheme\Slate.min.css" />
+    <Content Include="Content\BootstrapTheme\Slate.png" />
+    <Content Include="Content\BootstrapTheme\Spacelab.min.css" />
+    <Content Include="Content\BootstrapTheme\Spacelab.png" />
+    <Content Include="Content\BootstrapTheme\Superhero.min.css" />
+    <Content Include="Content\BootstrapTheme\Superhero.png" />
+    <Content Include="Content\BootstrapTheme\United.min.css" />
+    <Content Include="Content\BootstrapTheme\United.png" />
+    <Content Include="Content\BootstrapTheme\Yeti.min.css" />
+    <Content Include="Content\BootstrapTheme\Yeti.png" />
+    <Content Include="favicon.ico" />
+    <Content Include="fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Global.asax" />
+    <Content Include="Content\Site.css" />
+    <Content Include="ApplicationInsights.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Content\bootstrap.min.css.map" />
+    <Content Include="Content\bootstrap.css.map" />
+    <Content Include="Content\bootstrap-theme.min.css.map" />
+    <Content Include="Content\bootstrap-theme.css.map" />
+    <Content Include="Plugins\Chart\Views\Bar-Normal.cshtml" />
+    <Content Include="Plugins\Chart\Views\Bar.cshtml" />
+    <Content Include="Plugins\Chart\Views\Doughnut-Normal.cshtml" />
+    <Content Include="Plugins\Chart\Views\Doughnut.cshtml" />
+    <Content Include="Plugins\Chart\Views\Line.cshtml" />
+    <Content Include="Plugins\Chart\Views\Pie-Normal.cshtml" />
+    <Content Include="Plugins\Chart\Views\Pie.cshtml" />
+    <Content Include="Plugins\Chart\Views\WakaTime.Dashboard.Activity.cshtml" />
+    <Content Include="Plugins\Chart\Views\WakaTime.Dashboard.Activity.Monthly.cshtml" />
+    <Content Include="Plugins\Chart\Views\WakaTime.Dashboard.Daily.cshtml" />
+    <Content Include="Plugins\Chart\Views\WakaTime.Dashboard.Language.cshtml" />
+    <Content Include="Plugins\Chart\Views\WakaTime.Dashboard.Null.cshtml" />
+    <Content Include="Plugins\Chart\Views\WakaTime.Dashboard.Project.cshtml" />
+    <Content Include="Plugins\Chart\Views\WakaTime.Dashboard.Rest.cshtml" />
+    <Content Include="Plugins\Chart\Views\Web.config" />
+    <Content Include="Plugins\ECharts\Core\echarts-gl.min.js" />
+    <Content Include="Plugins\ECharts\Core\echarts.min.js" />
+    <Content Include="Plugins\ECharts\Core\map\json\china.json" />
+    <Content Include="Plugins\ECharts\Core\map\json\world.json" />
+    <Content Include="Plugins\ECharts\Core\theme\dark.js" />
+    <Content Include="Plugins\ECharts\Core\theme\roma.js" />
+    <Content Include="Plugins\ECharts\Views\WakaTime.Dashboard.Activity.cshtml" />
+    <Content Include="Plugins\ECharts\Views\WakaTime.Dashboard.Activity.Monthly.cshtml" />
+    <Content Include="Plugins\ECharts\Views\WakaTime.Dashboard.CodeTime.cshtml" />
+    <Content Include="Plugins\ECharts\Views\WakaTime.Dashboard.Daily.cshtml" />
+    <Content Include="Plugins\ECharts\Views\WakaTime.Dashboard.Language.cshtml" />
+    <Content Include="Plugins\ECharts\Views\ECharts.Null.cshtml" />
+    <Content Include="Plugins\ECharts\Views\WakaTime.Dashboard.Project.cshtml" />
+    <Content Include="Plugins\Templets\bracket\ajax\images\photos\_div style=" />
+    <Content Include="Plugins\Templets\bracket\css\images\_div style=" />
+    <Content Include="Plugins\Templets\bracket\fonts\fontawesome-webfont.eot" />
+    <Content Include="Plugins\Templets\bracket\fonts\fontawesome-webfont.ttf" />
+    <Content Include="Plugins\Templets\bracket\fonts\fontawesome-webfont.woff" />
+    <Content Include="Plugins\Templets\bracket\fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Plugins\Templets\bracket\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="Plugins\Templets\bracket\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="Plugins\Templets\bracket\fonts\lato\Lato-Bla-webfont.eot" />
+    <Content Include="Plugins\Templets\bracket\fonts\lato\Lato-Bla-webfont.ttf" />
+    <Content Include="Plugins\Templets\bracket\fonts\lato\Lato-Bla-webfont.woff" />
+    <Content Include="Plugins\Templets\bracket\fonts\lato\Lato-BlaIta-webfont.eot" />
+    <Content Include="Plugins\Templets\bracket\fonts\lato\Lato-BlaIta-webfont.ttf" />
+    <Content Include="Plugins\Templets\bracket\fonts\lato\Lato-BlaIta-webfont.woff" />
+    <Content Include="Plugins\Templets\bracket\fonts\lato\Lato-Bol-webfont.eot" />
+    <Content Include="Plugins\Templets\bracket\fonts\lato\Lato-Bol-webfont.ttf" />
+    <Content Include="Plugins\Templets\bracket\fonts\lato\Lato-Bol-webfont.woff" />
+    <Content Include="Plugins\Templets\bracket\fonts\lato\Lato-BolIta-webfont.eot" />
+    <Content Include="Plugins\Templets\bracket\fonts\lato\Lato-BolIta-webfont.ttf" />
+    <Content Include="Plugins\Templets\bracket\fonts\lato\Lato-BolIta-webfont.woff" />
+    <Content Include="Plugins\Templets\bracket\fonts\lato\Lato-Hai-webfont.eot" />
+    <Content Include="Plugins\Templets\bracket\fonts\lato\Lato-Hai-webfont.ttf" />
+    <Content Include="Plugins\Templets\bracket\fonts\lato\Lato-Hai-webfont.woff" />
+    <Content Include="Plugins\Templets\bracket\fonts\lato\Lato-HaiIta-webfont.eot" />
+    <Content Include="Plugins\Templets\bracket\fonts\lato\Lato-HaiIta-webfont.ttf" />
+    <Content Include="Plugins\Templets\bracket\fonts\lato\Lato-HaiIta-webfont.woff" />
+    <Content Include="Plugins\Templets\bracket\fonts\lato\Lato-Lig-webfont.eot" />
+    <Content Include="Plugins\Templets\bracket\fonts\lato\Lato-Lig-webfont.ttf" />
+    <Content Include="Plugins\Templets\bracket\fonts\lato\Lato-Lig-webfont.woff" />
+    <Content Include="Plugins\Templets\bracket\fonts\lato\Lato-LigIta-webfont.eot" />
+    <Content Include="Plugins\Templets\bracket\fonts\lato\Lato-LigIta-webfont.ttf" />
+    <Content Include="Plugins\Templets\bracket\fonts\lato\Lato-LigIta-webfont.woff" />
+    <Content Include="Plugins\Templets\bracket\fonts\lato\Lato-Reg-webfont.eot" />
+    <Content Include="Plugins\Templets\bracket\fonts\lato\Lato-Reg-webfont.ttf" />
+    <Content Include="Plugins\Templets\bracket\fonts\lato\Lato-Reg-webfont.woff" />
+    <Content Include="Plugins\Templets\bracket\fonts\lato\Lato-RegIta-webfont.eot" />
+    <Content Include="Plugins\Templets\bracket\fonts\lato\Lato-RegIta-webfont.ttf" />
+    <Content Include="Plugins\Templets\bracket\fonts\lato\Lato-RegIta-webfont.woff" />
+    <Content Include="Plugins\Templets\bracket\fonts\roboto\Roboto-Black-webfont.eot" />
+    <Content Include="Plugins\Templets\bracket\fonts\roboto\Roboto-Black-webfont.eot~.eot" />
+    <Content Include="Plugins\Templets\bracket\fonts\roboto\Roboto-Black-webfont.ttf" />
+    <Content Include="Plugins\Templets\bracket\fonts\roboto\Roboto-Black-webfont.woff" />
+    <Content Include="Plugins\Templets\bracket\fonts\roboto\Roboto-BlackItalic-webfont.eot" />
+    <Content Include="Plugins\Templets\bracket\fonts\roboto\Roboto-BlackItalic-webfont.ttf" />
+    <Content Include="Plugins\Templets\bracket\fonts\roboto\Roboto-BlackItalic-webfont.woff" />
+    <Content Include="Plugins\Templets\bracket\fonts\roboto\Roboto-Bold-webfont.eot" />
+    <Content Include="Plugins\Templets\bracket\fonts\roboto\Roboto-Bold-webfont.ttf" />
+    <Content Include="Plugins\Templets\bracket\fonts\roboto\Roboto-Bold-webfont.woff" />
+    <Content Include="Plugins\Templets\bracket\fonts\roboto\Roboto-BoldCondensed-webfont.eot" />
+    <Content Include="Plugins\Templets\bracket\fonts\roboto\Roboto-BoldCondensed-webfont.ttf" />
+    <Content Include="Plugins\Templets\bracket\fonts\roboto\Roboto-BoldCondensed-webfont.woff" />
+    <Content Include="Plugins\Templets\bracket\fonts\roboto\Roboto-BoldCondensedItalic-webfont.eot" />
+    <Content Include="Plugins\Templets\bracket\fonts\roboto\Roboto-BoldCondensedItalic-webfont.ttf" />
+    <Content Include="Plugins\Templets\bracket\fonts\roboto\Roboto-BoldCondensedItalic-webfont.woff" />
+    <Content Include="Plugins\Templets\bracket\fonts\roboto\Roboto-BoldItalic-webfont.eot" />
+    <Content Include="Plugins\Templets\bracket\fonts\roboto\Roboto-BoldItalic-webfont.ttf" />
+    <Content Include="Plugins\Templets\bracket\fonts\roboto\Roboto-BoldItalic-webfont.woff" />
+    <Content Include="Plugins\Templets\bracket\fonts\roboto\Roboto-Condensed-webfont.eot" />
+    <Content Include="Plugins\Templets\bracket\fonts\roboto\Roboto-Condensed-webfont.ttf" />
+    <Content Include="Plugins\Templets\bracket\fonts\roboto\Roboto-Condensed-webfont.woff" />
+    <Content Include="Plugins\Templets\bracket\fonts\roboto\Roboto-CondensedItalic-webfont.eot" />
+    <Content Include="Plugins\Templets\bracket\fonts\roboto\Roboto-CondensedItalic-webfont.ttf" />
+    <Content Include="Plugins\Templets\bracket\fonts\roboto\Roboto-CondensedItalic-webfont.woff" />
+    <Content Include="Plugins\Templets\bracket\fonts\roboto\Roboto-Italic-webfont.eot" />
+    <Content Include="Plugins\Templets\bracket\fonts\roboto\Roboto-Italic-webfont.ttf" />
+    <Content Include="Plugins\Templets\bracket\fonts\roboto\Roboto-Italic-webfont.woff" />
+    <Content Include="Plugins\Templets\bracket\fonts\roboto\Roboto-Light-webfont.eot" />
+    <Content Include="Plugins\Templets\bracket\fonts\roboto\Roboto-Light-webfont.ttf" />
+    <Content Include="Plugins\Templets\bracket\fonts\roboto\Roboto-Light-webfont.woff" />
+    <Content Include="Plugins\Templets\bracket\fonts\roboto\Roboto-LightItalic-webfont.eot" />
+    <Content Include="Plugins\Templets\bracket\fonts\roboto\Roboto-LightItalic-webfont.ttf" />
+    <Content Include="Plugins\Templets\bracket\fonts\roboto\Roboto-LightItalic-webfont.woff" />
+    <Content Include="Plugins\Templets\bracket\fonts\roboto\Roboto-Medium-webfont.eot" />
+    <Content Include="Plugins\Templets\bracket\fonts\roboto\Roboto-Medium-webfont.ttf" />
+    <Content Include="Plugins\Templets\bracket\fonts\roboto\Roboto-Medium-webfont.woff" />
+    <Content Include="Plugins\Templets\bracket\fonts\roboto\Roboto-MediumItalic-webfont.eot" />
+    <Content Include="Plugins\Templets\bracket\fonts\roboto\Roboto-MediumItalic-webfont.ttf" />
+    <Content Include="Plugins\Templets\bracket\fonts\roboto\Roboto-MediumItalic-webfont.woff" />
+    <Content Include="Plugins\Templets\bracket\fonts\roboto\Roboto-Regular-webfont.eot" />
+    <Content Include="Plugins\Templets\bracket\fonts\roboto\Roboto-Regular-webfont.ttf" />
+    <Content Include="Plugins\Templets\bracket\fonts\roboto\Roboto-Regular-webfont.woff" />
+    <Content Include="Plugins\Templets\bracket\fonts\roboto\Roboto-Thin-webfont.eot" />
+    <Content Include="Plugins\Templets\bracket\fonts\roboto\Roboto-Thin-webfont.ttf" />
+    <Content Include="Plugins\Templets\bracket\fonts\roboto\Roboto-Thin-webfont.woff" />
+    <Content Include="Plugins\Templets\bracket\fonts\roboto\Roboto-ThinItalic-webfont.eot" />
+    <Content Include="Plugins\Templets\bracket\fonts\roboto\Roboto-ThinItalic-webfont.ttf" />
+    <Content Include="Plugins\Templets\bracket\fonts\roboto\Roboto-ThinItalic-webfont.woff" />
+    <Content Include="Plugins\Templets\bracket\fonts\weathericons-regular-webfont.eot" />
+    <Content Include="Plugins\Templets\bracket\fonts\weathericons-regular-webfont.ttf" />
+    <Content Include="Plugins\Templets\bracket\fonts\weathericons-regular-webfont.woff" />
+    <Content Include="Plugins\Templets\bracket\holder.js\80x60\_div style=" />
+    <Content Include="Plugins\Templets\bracket\holder.js\_div style=" />
+    <Content Include="Plugins\Templets\bracket\images\prettyphoto\dark_rounded\_div style=" />
+    <Content Include="Plugins\Templets\bracket\images\prettyphoto\dark_square\_div style=" />
+    <Content Include="Plugins\Templets\bracket\images\prettyphoto\facebook\_div style=" />
+    <Content Include="Plugins\Templets\bracket\images\prettyphoto\light_rounded\_div style=" />
+    <Content Include="Plugins\Templets\bracket\images\prettyphoto\light_square\_div style=" />
+    <Content Include="Plugins\Templets\bracket\js\ckeditor\,CKEDITOR.tools.htmlEncode%28e.id__" />
+    <Content Include="Plugins\Templets\bracket\js\ckeditor\,CKEDITOR.tools.htmlEncode%28e._[" />
+    <Content Include="Plugins\Templets\bracket\js\ckeditor\images\_div style=" />
+    <Content Include="Plugins\Chart\Core\Chart.min.js" />
+    <Content Include="Plugins\Chart\Core\Chart.Utils.js" />
+    <Content Include="Plugins\ECharts\Core\map\js\china.js" />
+    <Content Include="Plugins\ECharts\Core\map\js\world.js" />
+    <Content Include="Plugins\ECharts\Core\theme\infographic.js" />
+    <Content Include="Plugins\ECharts\Core\theme\macarons.js" />
+    <Content Include="Plugins\ECharts\Core\theme\shine.js" />
+    <Content Include="Plugins\ECharts\Core\theme\vintage.js" />
+    <Content Include="Plugins\Masonry\css\component.css" />
+    <Content Include="Plugins\Masonry\css\default.css" />
+    <Content Include="Plugins\Masonry\js\AnimOnScroll.js" />
+    <Content Include="Plugins\Masonry\js\classie.js" />
+    <Content Include="Plugins\Masonry\js\imagesloaded.js" />
+    <Content Include="Plugins\Masonry\js\masonry.pkgd.min.js" />
+    <Content Include="Plugins\Masonry\js\modernizr.custom.js" />
+    <Content Include="Plugins\pickadate\css\default.css" />
+    <Content Include="Plugins\pickadate\css\default.date.css" />
+    <Content Include="Plugins\pickadate\css\default.time.css" />
+    <Content Include="Plugins\pickadate\js\legacy.js" />
+    <Content Include="Plugins\pickadate\js\picker.date.js" />
+    <Content Include="Plugins\pickadate\js\picker.js" />
+    <Content Include="Plugins\pickadate\js\picker.time.js" />
+    <Content Include="Plugins\ResponsiveNav\css\responsive-nav.css" />
+    <Content Include="Plugins\ResponsiveNav\css\styles.css" />
+    <Content Include="Plugins\ResponsiveNav\js\responsive-nav.js" />
+    <Content Include="Plugins\Templets\bracket\ajax\accordion.html" />
+    <Content Include="Plugins\Templets\bracket\ajax\images\photos\photo4.jpg.html" />
+    <Content Include="Plugins\Templets\bracket\ajax\panel.html" />
+    <Content Include="Plugins\Templets\bracket\ajax\photo-viewer.html" />
+    <Content Include="Plugins\Templets\bracket\ajax\remote.html" />
+    <Content Include="Plugins\Templets\bracket\ajax\tabs.html" />
+    <Content Include="Plugins\Templets\bracket\alerts.html" />
+    <Content Include="Plugins\Templets\bracket\all.html" />
+    <Content Include="Plugins\Templets\bracket\audio.html" />
+    <Content Include="Plugins\Templets\bracket\blank.html" />
+    <Content Include="Plugins\Templets\bracket\blog-list.html" />
+    <Content Include="Plugins\Templets\bracket\blog-single.html" />
+    <Content Include="Plugins\Templets\bracket\bug-issues.html" />
+    <Content Include="Plugins\Templets\bracket\bug-tracker.html" />
+    <Content Include="Plugins\Templets\bracket\buttons.html" />
+    <Content Include="Plugins\Templets\bracket\calendar.html" />
+    <Content Include="Plugins\Templets\bracket\code-editor.html" />
+    <Content Include="Plugins\Templets\bracket\compose.html" />
+    <Content Include="Plugins\Templets\bracket\css\animate.delay.css" />
+    <Content Include="Plugins\Templets\bracket\css\animate.min.css" />
+    <Content Include="Plugins\Templets\bracket\css\bootstrap-editable.css" />
+    <Content Include="Plugins\Templets\bracket\css\bootstrap-override.css" />
+    <Content Include="Plugins\Templets\bracket\css\bootstrap-timepicker.min.css" />
+    <Content Include="Plugins\Templets\bracket\css\bootstrap-wysihtml5.css" />
+    <Content Include="Plugins\Templets\bracket\css\bootstrap.min.css" />
+    <Content Include="Plugins\Templets\bracket\css\codemirror\codemirror.css" />
+    <Content Include="Plugins\Templets\bracket\css\codemirror\theme\ambiance.css" />
+    <Content Include="Plugins\Templets\bracket\css\colorpicker.css" />
+    <Content Include="Plugins\Templets\bracket\css\dropzone.css" />
+    <Content Include="Plugins\Templets\bracket\css\font-awesome.min.css" />
+    <Content Include="Plugins\Templets\bracket\css\fullcalendar.css" />
+    <Content Include="Plugins\Templets\bracket\css\helvetica.css.html" />
+    <Content Include="Plugins\Templets\bracket\css\images\animated-overlay.gif.html" />
+    <Content Include="Plugins\Templets\bracket\css\jquery-jvectormap-1.2.2.css" />
+    <Content Include="Plugins\Templets\bracket\css\jquery-ui-1.10.3.css" />
+    <Content Include="Plugins\Templets\bracket\css\jquery.datatables.css" />
+    <Content Include="Plugins\Templets\bracket\css\jquery.gritter.css" />
+    <Content Include="Plugins\Templets\bracket\css\jquery.tagsinput.css" />
+    <Content Include="Plugins\Templets\bracket\css\lato.css" />
+    <Content Include="Plugins\Templets\bracket\css\morris.css" />
+    <Content Include="Plugins\Templets\bracket\css\prettyPhoto.css" />
+    <Content Include="Plugins\Templets\bracket\css\roboto.css" />
+    <Content Include="Plugins\Templets\bracket\css\select2.css" />
+    <Content Include="Plugins\Templets\bracket\css\style.default.css" />
+    <Content Include="Plugins\Templets\bracket\css\toggles.css" />
+    <Content Include="Plugins\Templets\bracket\css\weather-icons.min.css" />
+    <Content Include="Plugins\Templets\bracket\document.html" />
+    <Content Include="Plugins\Templets\bracket\email.html" />
+    <Content Include="Plugins\Templets\bracket\extras.html" />
+    <Content Include="Plugins\Templets\bracket\fixed-width.html" />
+    <Content Include="Plugins\Templets\bracket\fixed-width2.html" />
+    <Content Include="Plugins\Templets\bracket\fonts\fontawesome-webfont.svg" />
+    <Content Include="Plugins\Templets\bracket\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Plugins\Templets\bracket\fonts\lato\Lato-Bla-webfont.svg" />
+    <Content Include="Plugins\Templets\bracket\fonts\lato\Lato-BlaIta-webfont.svg" />
+    <Content Include="Plugins\Templets\bracket\fonts\lato\Lato-Bol-webfont.svg" />
+    <Content Include="Plugins\Templets\bracket\fonts\lato\Lato-BolIta-webfont.svg" />
+    <Content Include="Plugins\Templets\bracket\fonts\lato\Lato-Hai-webfont.svg" />
+    <Content Include="Plugins\Templets\bracket\fonts\lato\Lato-HaiIta-webfont.svg" />
+    <Content Include="Plugins\Templets\bracket\fonts\lato\Lato-Lig-webfont.svg" />
+    <Content Include="Plugins\Templets\bracket\fonts\lato\Lato-LigIta-webfont.svg" />
+    <Content Include="Plugins\Templets\bracket\fonts\lato\Lato-Reg-webfont.svg" />
+    <Content Include="Plugins\Templets\bracket\fonts\lato\Lato-RegIta-webfont.svg" />
+    <Content Include="Plugins\Templets\bracket\fonts\roboto\Roboto-Black-webfont.svg" />
+    <Content Include="Plugins\Templets\bracket\fonts\roboto\Roboto-BlackItalic-webfont.svg" />
+    <Content Include="Plugins\Templets\bracket\fonts\roboto\Roboto-Bold-webfont.svg" />
+    <Content Include="Plugins\Templets\bracket\fonts\roboto\Roboto-BoldCondensed-webfont.svg" />
+    <Content Include="Plugins\Templets\bracket\fonts\roboto\Roboto-BoldCondensedItalic-webfont.svg" />
+    <Content Include="Plugins\Templets\bracket\fonts\roboto\Roboto-BoldItalic-webfont.svg" />
+    <Content Include="Plugins\Templets\bracket\fonts\roboto\Roboto-Condensed-webfont.svg" />
+    <Content Include="Plugins\Templets\bracket\fonts\roboto\Roboto-CondensedItalic-webfont.svg" />
+    <Content Include="Plugins\Templets\bracket\fonts\roboto\Roboto-Italic-webfont.svg" />
+    <Content Include="Plugins\Templets\bracket\fonts\roboto\Roboto-Light-webfont.svg" />
+    <Content Include="Plugins\Templets\bracket\fonts\roboto\Roboto-LightItalic-webfont.svg" />
+    <Content Include="Plugins\Templets\bracket\fonts\roboto\Roboto-Medium-webfont.svg" />
+    <Content Include="Plugins\Templets\bracket\fonts\roboto\Roboto-MediumItalic-webfont.svg" />
+    <Content Include="Plugins\Templets\bracket\fonts\roboto\Roboto-Regular-webfont.svg" />
+    <Content Include="Plugins\Templets\bracket\fonts\roboto\Roboto-Thin-webfont.svg" />
+    <Content Include="Plugins\Templets\bracket\fonts\roboto\Roboto-ThinItalic-webfont.svg" />
+    <Content Include="Plugins\Templets\bracket\fonts\weathericons-regular-webfont.svg" />
+    <Content Include="Plugins\Templets\bracket\form-layouts.html" />
+    <Content Include="Plugins\Templets\bracket\form-validation.html" />
+    <Content Include="Plugins\Templets\bracket\form-wizards.html" />
+    <Content Include="Plugins\Templets\bracket\general-forms.html" />
+    <Content Include="Plugins\Templets\bracket\graphs.html" />
+    <Content Include="Plugins\Templets\bracket\holder.js\100x120.html" />
+    <Content Include="Plugins\Templets\bracket\holder.js\100x125.html" />
+    <Content Include="Plugins\Templets\bracket\holder.js\110x110.html" />
+    <Content Include="Plugins\Templets\bracket\holder.js\60x60.html" />
+    <Content Include="Plugins\Templets\bracket\holder.js\80x60\80x60.html" />
+    <Content Include="Plugins\Templets\bracket\horizontal-menu.html" />
+    <Content Include="Plugins\Templets\bracket\horizontal-menu2.html" />
+    <Content Include="Plugins\Templets\bracket\icons.html" />
+    <Content Include="Plugins\Templets\bracket\image.html" />
+    <Content Include="Plugins\Templets\bracket\images\calendar-arrow.png" />
+    <Content Include="Plugins\Templets\bracket\images\clear.png" />
+    <Content Include="Plugins\Templets\bracket\images\close-white.png" />
+    <Content Include="Plugins\Templets\bracket\images\colorpicker\colorpicker_background.png" />
+    <Content Include="Plugins\Templets\bracket\images\colorpicker\colorpicker_hex.png" />
+    <Content Include="Plugins\Templets\bracket\images\colorpicker\colorpicker_hsb_b.png" />
+    <Content Include="Plugins\Templets\bracket\images\colorpicker\colorpicker_hsb_h.png" />
+    <Content Include="Plugins\Templets\bracket\images\colorpicker\colorpicker_hsb_s.png" />
+    <Content Include="Plugins\Templets\bracket\images\colorpicker\colorpicker_indic.gif" />
+    <Content Include="Plugins\Templets\bracket\images\colorpicker\colorpicker_overlay.png" />
+    <Content Include="Plugins\Templets\bracket\images\colorpicker\colorpicker_rgb_b.png" />
+    <Content Include="Plugins\Templets\bracket\images\colorpicker\colorpicker_rgb_g.png" />
+    <Content Include="Plugins\Templets\bracket\images\colorpicker\colorpicker_rgb_r.png" />
+    <Content Include="Plugins\Templets\bracket\images\colorpicker\colorpicker_select.gif" />
+    <Content Include="Plugins\Templets\bracket\images\colorpicker\colorpicker_submit.png" />
+    <Content Include="Plugins\Templets\bracket\images\colorpicker\select2.png" />
+    <Content Include="Plugins\Templets\bracket\images\droparrows.png" />
+    <Content Include="Plugins\Templets\bracket\images\dropdown-arrow.png" />
+    <Content Include="Plugins\Templets\bracket\images\favicon.png" />
+    <Content Include="Plugins\Templets\bracket\images\icon-search.png" />
+    <Content Include="Plugins\Templets\bracket\images\is-document.png" />
+    <Content Include="Plugins\Templets\bracket\images\is-money.png" />
+    <Content Include="Plugins\Templets\bracket\images\is-user.png" />
+    <Content Include="Plugins\Templets\bracket\images\loaders\loader1.gif" />
+    <Content Include="Plugins\Templets\bracket\images\loaders\loader10.gif" />
+    <Content Include="Plugins\Templets\bracket\images\loaders\loader11.gif" />
+    <Content Include="Plugins\Templets\bracket\images\loaders\loader12.gif" />
+    <Content Include="Plugins\Templets\bracket\images\loaders\loader13.gif" />
+    <Content Include="Plugins\Templets\bracket\images\loaders\loader14.gif" />
+    <Content Include="Plugins\Templets\bracket\images\loaders\loader15.gif" />
+    <Content Include="Plugins\Templets\bracket\images\loaders\loader16.gif" />
+    <Content Include="Plugins\Templets\bracket\images\loaders\loader17.gif" />
+    <Content Include="Plugins\Templets\bracket\images\loaders\loader18.gif" />
+    <Content Include="Plugins\Templets\bracket\images\loaders\loader19.gif" />
+    <Content Include="Plugins\Templets\bracket\images\loaders\loader2.gif" />
+    <Content Include="Plugins\Templets\bracket\images\loaders\loader20.gif" />
+    <Content Include="Plugins\Templets\bracket\images\loaders\loader21.gif" />
+    <Content Include="Plugins\Templets\bracket\images\loaders\loader22.gif" />
+    <Content Include="Plugins\Templets\bracket\images\loaders\loader23.gif" />
+    <Content Include="Plugins\Templets\bracket\images\loaders\loader24.gif" />
+    <Content Include="Plugins\Templets\bracket\images\loaders\loader25.gif" />
+    <Content Include="Plugins\Templets\bracket\images\loaders\loader26.gif" />
+    <Content Include="Plugins\Templets\bracket\images\loaders\loader27.gif" />
+    <Content Include="Plugins\Templets\bracket\images\loaders\loader28.gif" />
+    <Content Include="Plugins\Templets\bracket\images\loaders\loader29.gif" />
+    <Content Include="Plugins\Templets\bracket\images\loaders\loader3.gif" />
+    <Content Include="Plugins\Templets\bracket\images\loaders\loader30.gif" />
+    <Content Include="Plugins\Templets\bracket\images\loaders\loader4.gif" />
+    <Content Include="Plugins\Templets\bracket\images\loaders\loader5.gif" />
+    <Content Include="Plugins\Templets\bracket\images\loaders\loader6.gif" />
+    <Content Include="Plugins\Templets\bracket\images\loaders\loader7.gif" />
+    <Content Include="Plugins\Templets\bracket\images\loaders\loader8.gif" />
+    <Content Include="Plugins\Templets\bracket\images\loaders\loader9.gif" />
+    <Content Include="Plugins\Templets\bracket\images\loading.gif" />
+    <Content Include="Plugins\Templets\bracket\images\locked.png" />
+    <Content Include="Plugins\Templets\bracket\images\minus.png" />
+    <Content Include="Plugins\Templets\bracket\images\photos\blog1.jpg" />
+    <Content Include="Plugins\Templets\bracket\images\photos\blog2.jpg" />
+    <Content Include="Plugins\Templets\bracket\images\photos\blog3.jpg" />
+    <Content Include="Plugins\Templets\bracket\images\photos\blog4.jpg" />
+    <Content Include="Plugins\Templets\bracket\images\photos\loggeduser.png" />
+    <Content Include="Plugins\Templets\bracket\images\photos\media-audio.png" />
+    <Content Include="Plugins\Templets\bracket\images\photos\media-doc.png" />
+    <Content Include="Plugins\Templets\bracket\images\photos\media1.jpg" />
+    <Content Include="Plugins\Templets\bracket\images\photos\media2.png" />
+    <Content Include="Plugins\Templets\bracket\images\photos\media3.png" />
+    <Content Include="Plugins\Templets\bracket\images\photos\media4.png" />
+    <Content Include="Plugins\Templets\bracket\images\photos\media5.png" />
+    <Content Include="Plugins\Templets\bracket\images\photos\media6.png" />
+    <Content Include="Plugins\Templets\bracket\images\photos\media7.png" />
+    <Content Include="Plugins\Templets\bracket\images\photos\photo1.png" />
+    <Content Include="Plugins\Templets\bracket\images\photos\photo2.png" />
+    <Content Include="Plugins\Templets\bracket\images\photos\photo3.png" />
+    <Content Include="Plugins\Templets\bracket\images\photos\profile-1.png" />
+    <Content Include="Plugins\Templets\bracket\images\photos\profilepic1.png" />
+    <Content Include="Plugins\Templets\bracket\images\photos\user1.png" />
+    <Content Include="Plugins\Templets\bracket\images\photos\user2.png" />
+    <Content Include="Plugins\Templets\bracket\images\photos\user3.png" />
+    <Content Include="Plugins\Templets\bracket\images\photos\user4.png" />
+    <Content Include="Plugins\Templets\bracket\images\photos\user5.png" />
+    <Content Include="Plugins\Templets\bracket\images\photos\userprofile.png" />
+    <Content Include="Plugins\Templets\bracket\images\plus-white.png" />
+    <Content Include="Plugins\Templets\bracket\images\plus.png" />
+    <Content Include="Plugins\Templets\bracket\images\prettyphoto\dark_rounded\btnNext.png.html" />
+    <Content Include="Plugins\Templets\bracket\images\prettyphoto\dark_rounded\btnPrevious.png.html" />
+    <Content Include="Plugins\Templets\bracket\images\prettyphoto\dark_rounded\contentPattern.png.html" />
+    <Content Include="Plugins\Templets\bracket\images\prettyphoto\dark_rounded\loader.gif.html" />
+    <Content Include="Plugins\Templets\bracket\images\prettyphoto\dark_rounded\sprite.png.html" />
+    <Content Include="Plugins\Templets\bracket\images\prettyphoto\dark_square\btnNext.png.html" />
+    <Content Include="Plugins\Templets\bracket\images\prettyphoto\dark_square\btnPrevious.png.html" />
+    <Content Include="Plugins\Templets\bracket\images\prettyphoto\dark_square\loader.gif.html" />
+    <Content Include="Plugins\Templets\bracket\images\prettyphoto\dark_square\sprite.png.html" />
+    <Content Include="Plugins\Templets\bracket\images\prettyphoto\default_thumb.png" />
+    <Content Include="Plugins\Templets\bracket\images\prettyphoto\facebook\btnNext.png.html" />
+    <Content Include="Plugins\Templets\bracket\images\prettyphoto\facebook\btnPrevious.png.html" />
+    <Content Include="Plugins\Templets\bracket\images\prettyphoto\facebook\contentPatternBottom.png.html" />
+    <Content Include="Plugins\Templets\bracket\images\prettyphoto\facebook\contentPatternLeft.png.html" />
+    <Content Include="Plugins\Templets\bracket\images\prettyphoto\facebook\contentPatternRight.png.html" />
+    <Content Include="Plugins\Templets\bracket\images\prettyphoto\facebook\contentPatternTop.png.html" />
+    <Content Include="Plugins\Templets\bracket\images\prettyphoto\facebook\default_thumbnail.gif.html" />
+    <Content Include="Plugins\Templets\bracket\images\prettyphoto\facebook\loader.gif.html" />
+    <Content Include="Plugins\Templets\bracket\images\prettyphoto\facebook\sprite.png.html" />
+    <Content Include="Plugins\Templets\bracket\images\prettyphoto\light_rounded\btnNext.png.html" />
+    <Content Include="Plugins\Templets\bracket\images\prettyphoto\light_rounded\btnPrevious.png.html" />
+    <Content Include="Plugins\Templets\bracket\images\prettyphoto\light_rounded\loader.gif.html" />
+    <Content Include="Plugins\Templets\bracket\images\prettyphoto\light_rounded\sprite.png.html" />
+    <Content Include="Plugins\Templets\bracket\images\prettyphoto\light_square\btnNext.png.html" />
+    <Content Include="Plugins\Templets\bracket\images\prettyphoto\light_square\btnPrevious.png.html" />
+    <Content Include="Plugins\Templets\bracket\images\prettyphoto\light_square\sprite.png.html" />
+    <Content Include="Plugins\Templets\bracket\images\prettyphoto\loader.gif" />
+    <Content Include="Plugins\Templets\bracket\images\prettyphoto\sprite.png" />
+    <Content Include="Plugins\Templets\bracket\images\prettyphoto\sprite_next.png" />
+    <Content Include="Plugins\Templets\bracket\images\prettyphoto\sprite_prev.png" />
+    <Content Include="Plugins\Templets\bracket\images\prettyphoto\sprite_x.png" />
+    <Content Include="Plugins\Templets\bracket\images\prettyphoto\sprite_y.png" />
+    <Content Include="Plugins\Templets\bracket\images\screen.png" />
+    <Content Include="Plugins\Templets\bracket\images\select2-spinner.gif" />
+    <Content Include="Plugins\Templets\bracket\images\select2.png" />
+    <Content Include="Plugins\Templets\bracket\images\select2x2.png" />
+    <Content Include="Plugins\Templets\bracket\images\sort_asc.png" />
+    <Content Include="Plugins\Templets\bracket\images\sort_asc_disabled.png" />
+    <Content Include="Plugins\Templets\bracket\images\sort_both.png" />
+    <Content Include="Plugins\Templets\bracket\images\sort_desc.png" />
+    <Content Include="Plugins\Templets\bracket\images\sort_desc_disabled.png" />
+    <Content Include="Plugins\Templets\bracket\images\spritemap%402x.png" />
+    <Content Include="Plugins\Templets\bracket\images\spritemap.png" />
+    <Content Include="Plugins\Templets\bracket\images\themeforest.png" />
+    <Content Include="Plugins\Templets\bracket\images\uploadfile.png" />
+    <Content Include="Plugins\Templets\bracket\images\user.png" />
+    <Content Include="Plugins\Templets\bracket\index.html" />
+    <Content Include="Plugins\Templets\bracket\invoice.html" />
+    <Content Include="Plugins\Templets\bracket\js\bootstrap-datetimepicker.min.js" />
+    <Content Include="Plugins\Templets\bracket\js\bootstrap-editable.min.js" />
+    <Content Include="Plugins\Templets\bracket\js\bootstrap-timepicker.min.js" />
+    <Content Include="Plugins\Templets\bracket\js\bootstrap-wizard.min.js" />
+    <Content Include="Plugins\Templets\bracket\js\bootstrap-wysihtml5.js" />
+    <Content Include="Plugins\Templets\bracket\js\bootstrap.min.js" />
+    <Content Include="Plugins\Templets\bracket\js\charts.js" />
+    <Content Include="Plugins\Templets\bracket\js\chosen.jquery.min.js" />
+    <Content Include="Plugins\Templets\bracket\js\ckeditor\adapters\jquery.js" />
+    <Content Include="Plugins\Templets\bracket\js\ckeditor\ckeditor.js" />
+    <Content Include="Plugins\Templets\bracket\js\ckeditor\images\spacer.gif.html" />
+    <Content Include="Plugins\Templets\bracket\js\codemirror\codemirror.js" />
+    <Content Include="Plugins\Templets\bracket\js\codemirror\formatting.js" />
+    <Content Include="Plugins\Templets\bracket\js\codemirror\mode\javascript.js" />
+    <Content Include="Plugins\Templets\bracket\js\codemirror\mode\xml.js" />
+    <Content Include="Plugins\Templets\bracket\js\colorpicker.js" />
+    <Content Include="Plugins\Templets\bracket\js\custom.js" />
+    <Content Include="Plugins\Templets\bracket\js\dashboard.js" />
+    <Content Include="Plugins\Templets\bracket\js\dropzone.min.js" />
+    <Content Include="Plugins\Templets\bracket\js\flot\jquery.flot.categories.min.js" />
+    <Content Include="Plugins\Templets\bracket\js\flot\jquery.flot.crosshair.min.js" />
+    <Content Include="Plugins\Templets\bracket\js\flot\jquery.flot.min.js" />
+    <Content Include="Plugins\Templets\bracket\js\flot\jquery.flot.pie.min.js" />
+    <Content Include="Plugins\Templets\bracket\js\flot\jquery.flot.resize.min.js" />
+    <Content Include="Plugins\Templets\bracket\js\flot\jquery.flot.spline.min.js" />
+    <Content Include="Plugins\Templets\bracket\js\flot\jquery.flot.symbol.min.js" />
+    <Content Include="Plugins\Templets\bracket\js\fullcalendar.min.js" />
+    <Content Include="Plugins\Templets\bracket\js\gmaps.js" />
+    <Content Include="Plugins\Templets\bracket\js\holder.js" />
+    <Content Include="Plugins\Templets\bracket\js\html5shiv.js" />
+    <Content Include="Plugins\Templets\bracket\js\jquery-1.11.1.min.js" />
+    <Content Include="Plugins\Templets\bracket\js\jquery-jvectormap-1.2.2.min.js" />
+    <Content Include="Plugins\Templets\bracket\js\jquery-jvectormap-us-aea-en.js" />
+    <Content Include="Plugins\Templets\bracket\js\jquery-jvectormap-world-mill-en.js" />
+    <Content Include="Plugins\Templets\bracket\js\jquery-migrate-1.2.1.min.js" />
+    <Content Include="Plugins\Templets\bracket\js\jquery-ui-1.10.3.min.js" />
+    <Content Include="Plugins\Templets\bracket\js\jquery.autogrow-textarea.js" />
+    <Content Include="Plugins\Templets\bracket\js\jquery.cookies.js" />
+    <Content Include="Plugins\Templets\bracket\js\jquery.datatables.min.js" />
+    <Content Include="Plugins\Templets\bracket\js\jquery.gritter.min.js" />
+    <Content Include="Plugins\Templets\bracket\js\jquery.maskedinput.min.js" />
+    <Content Include="Plugins\Templets\bracket\js\jquery.mousewheel.js" />
+    <Content Include="Plugins\Templets\bracket\js\jquery.prettyPhoto.js" />
+    <Content Include="Plugins\Templets\bracket\js\jquery.sparkline.min.js" />
+    <Content Include="Plugins\Templets\bracket\js\jquery.tagsinput.min.js" />
+    <Content Include="Plugins\Templets\bracket\js\jquery.ui.touch-punch.min.js" />
+    <Content Include="Plugins\Templets\bracket\js\jquery.validate.min.js" />
+    <Content Include="Plugins\Templets\bracket\js\masonry.pkgd.min.js" />
+    <Content Include="Plugins\Templets\bracket\js\modernizr.min.js" />
+    <Content Include="Plugins\Templets\bracket\js\moment.js" />
+    <Content Include="Plugins\Templets\bracket\js\morris.min.js" />
+    <Content Include="Plugins\Templets\bracket\js\raphael-2.1.0.min.js" />
+    <Content Include="Plugins\Templets\bracket\js\respond.min.js" />
+    <Content Include="Plugins\Templets\bracket\js\retina.min.js" />
+    <Content Include="Plugins\Templets\bracket\js\select2.min.js" />
+    <Content Include="Plugins\Templets\bracket\js\toggles.min.js" />
+    <Content Include="Plugins\Templets\bracket\js\wysihtml5-0.3.0.min.js" />
+    <Content Include="Plugins\Templets\bracket\layouts.html" />
+    <Content Include="Plugins\Templets\bracket\locked.html" />
+    <Content Include="Plugins\Templets\bracket\maps.html" />
+    <Content Include="Plugins\Templets\bracket\media-manager.html" />
+    <Content Include="Plugins\Templets\bracket\modals.html" />
+    <Content Include="Plugins\Templets\bracket\notfound.html" />
+    <Content Include="Plugins\Templets\bracket\p1.php" />
+    <Content Include="Plugins\Templets\bracket\p2.php" />
+    <Content Include="Plugins\Templets\bracket\people-directory.html" />
+    <Content Include="Plugins\Templets\bracket\profile.html" />
+    <Content Include="Plugins\Templets\bracket\read.html" />
+    <Content Include="Plugins\Templets\bracket\search-results.html" />
+    <Content Include="Plugins\Templets\bracket\signin.html" />
+    <Content Include="Plugins\Templets\bracket\signout.html" />
+    <Content Include="Plugins\Templets\bracket\signup.html" />
+    <Content Include="Plugins\Templets\bracket\sliders.html" />
+    <Content Include="Plugins\Templets\bracket\tables.html" />
+    <Content Include="Plugins\Templets\bracket\tabs-accordions.html" />
+    <Content Include="Plugins\Templets\bracket\timeline.html" />
+    <Content Include="Plugins\Templets\bracket\typography.html" />
+    <Content Include="Plugins\Templets\bracket\video.html" />
+    <Content Include="Plugins\Templets\bracket\view-issue.html" />
+    <Content Include="Plugins\Templets\bracket\Virgin Islands, U.S" />
+    <Content Include="Plugins\Templets\bracket\widgets.html" />
+    <Content Include="Plugins\Templets\bracket\wysiwyg.html" />
+    <Content Include="Plugins\Templets\bracket\x-editable.html" />
+    <Content Include="Plugins\Y.Scripts\ajax.tools.js" />
+    <Content Include="Plugins\Y.Scripts\navbar.tool.js" />
+    <Content Include="Scripts\bootstrap.js" />
+    <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Plugins\ECharts\Views\ECharts.BasicLineChart.cshtml" />
+    <Content Include="Plugins\ECharts\Views\Web.config" />
+    <Content Include="Plugins\ECharts\Views\ECharts.BarSimple.cshtml" />
+    <Content Include="Plugins\ECharts\Views\ECharts.BasicScatterChart.cshtml" />
+    <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
+    <None Include="Scripts\jquery-3.3.1.intellisense.js" />
+    <Content Include="Scripts\jquery-3.3.1.js" />
+    <Content Include="Scripts\jquery-3.3.1.min.js" />
+    <Content Include="Scripts\jquery-3.3.1.slim.js" />
+    <Content Include="Scripts\jquery-3.3.1.slim.min.js" />
+    <Content Include="Scripts\jquery-3.3.1.slim.min.map" />
+    <Content Include="Scripts\jquery-3.3.1.min.map" />
+    <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.validate.js" />
+    <Content Include="Scripts\jquery.validate.min.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\modernizr-2.6.2.js" />
+    <Content Include="Scripts\respond.js" />
+    <Content Include="Scripts\respond.min.js" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Views\Web.config" />
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Shared\Error.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Home\About.cshtml" />
+    <Content Include="Views\Home\Contact.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Account\_ExternalLoginsListPartial.cshtml" />
+    <Content Include="Views\Account\ConfirmEmail.cshtml" />
+    <Content Include="Views\Account\ExternalLoginConfirmation.cshtml" />
+    <Content Include="Views\Account\ExternalLoginFailure.cshtml" />
+    <Content Include="Views\Account\ForgotPassword.cshtml" />
+    <Content Include="Views\Account\ForgotPasswordConfirmation.cshtml" />
+    <Content Include="Views\Account\Login.cshtml" />
+    <Content Include="Views\Account\Register.cshtml" />
+    <Content Include="Views\Account\ResetPassword.cshtml" />
+    <Content Include="Views\Account\ResetPasswordConfirmation.cshtml" />
+    <Content Include="Views\Account\SendCode.cshtml" />
+    <Content Include="Views\Account\VerifyCode.cshtml" />
+    <Content Include="Views\Manage\AddPhoneNumber.cshtml" />
+    <Content Include="Views\Manage\ChangePassword.cshtml" />
+    <Content Include="Views\Manage\Index.cshtml" />
+    <Content Include="Views\Manage\ManageLogins.cshtml" />
+    <Content Include="Views\Manage\SetPassword.cshtml" />
+    <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
+    <Content Include="Views\Shared\Lockout.cshtml" />
+    <Content Include="Views\Shared\_LoginPartial.cshtml" />
+    <Content Include="Views\ReportDataSource\Index.cshtml" />
+    <Content Include="Views\ReportDataSource\Create.cshtml" />
+    <Content Include="Views\ReportDataSource\Edit.cshtml" />
+    <Content Include="Views\ReportDataSource\Details.cshtml" />
+    <Content Include="Views\ReportDataSource\Delete.cshtml" />
+    <Content Include="Views\ReportDataSet\Index.cshtml" />
+    <Content Include="Views\ReportDataSet\Details.cshtml" />
+    <Content Include="Views\ReportDataSet\Create.cshtml" />
+    <Content Include="Views\ReportDataSet\Edit.cshtml" />
+    <Content Include="Views\ReportDataSet\Delete.cshtml" />
+    <Content Include="Views\ReportTest\Index.cshtml" />
+    <Content Include="Views\ReportPage\Index.cshtml" />
+    <Content Include="Views\ReportPage\Details.cshtml" />
+    <Content Include="Views\ReportPage\Create.cshtml" />
+    <Content Include="Views\ReportPage\Edit.cshtml" />
+    <Content Include="Views\ReportPage\Delete.cshtml" />
+    <Content Include="Views\ReportPage\Preview.cshtml" />
+    <Content Include="Views\ReportPage\AddOption.cshtml" />
+    <Content Include="Views\ReportTest\Test.cshtml" />
+    <Content Include="Views\ReportPage\DeleteOption.cshtml" />
+    <Content Include="Views\ReportPage\EditOption.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+    <Folder Include="Views\ReportOption\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\WhaleReport.Models\WhaleReport.Models.csproj">
+      <Project>{31075607-84e0-435d-8d0c-c4cfcfefa8d6}</Project>
+      <Name>WhaleReport.Models</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\WhaleReport.Utils\WhaleReport.MainDB\WhaleReport.MainDB.csproj">
+      <Project>{1159019e-9b69-4df7-af49-a5f1d9a35c4a}</Project>
+      <Name>WhaleReport.MainDB</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\WhaleReport.Utils\WhaleReport.ReportDB\WhaleReport.ReportDB.csproj">
+      <Project>{9f9f7bef-266f-4ecc-acb1-56cf54255270}</Project>
+      <Name>WhaleReport.ReportDB</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <Target Name="MvcBuildViews" AfterTargets="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">
+    <AspNetCompiler VirtualPath="temp" PhysicalPath="$(WebProjectOutputDir)" />
+  </Target>
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>21708</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:21708/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>这台计算机上缺少此项目引用的 NuGet 程序包。使用“NuGet 程序包还原”可下载这些程序包。有关更多信息，请参见 http://go.microsoft.com/fwlink/?LinkID=322105。缺少的文件是 {0}。</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Microsoft.Net.Compilers.2.1.0\build\Microsoft.Net.Compilers.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Net.Compilers.2.1.0\build\Microsoft.Net.Compilers.props'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.7\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.7\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target> -->
+</Project>

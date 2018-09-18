@@ -1,0 +1,78 @@
+﻿@model Waka.Plugin.Chart.Model.ChartModel
+@{
+    Layout = null;
+    string canvasId = Guid.NewGuid().ToString();
+    string labels = Model.GetLabels();
+    string datasets = "";
+    foreach (var item in Model.DataSets)
+    {
+        datasets += "{";
+        datasets += string.Format("label: '{0}',", item.Label);
+        datasets += "backgroundColor: randomColor(),";
+        datasets += string.Format("data: [{0}]", item.GetDatas());
+        datasets += "},";
+    }
+}
+<div>
+    <h2><strong> 七日项目动态 </strong>  ( <a href="@(new HtmlString(string.Format("/WakaTime/ActivityMonthly?year={0}&month={1}", DateTime.Now.Year, DateTime.Now.Month)))">月度动态</a> ) </h2>
+    <div style="width: 90%;margin:0 auto;">
+        <canvas id="@canvasId"></canvas>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        var config = {
+            type: 'bar',
+            data: {
+                labels: [@(new HtmlString(labels))],
+                datasets: [@(new HtmlString(datasets))]
+            },
+            options: {
+                title: {
+                    display: false,
+                    text: "Chart.js Bar Chart - Stacked"
+                },
+                tooltips: {
+                    mode: 'label',
+                    callbacks: {
+                        title: function (tooltipItems, data) {
+                            // Pick first xLabel for now
+                            var title = '';
+                            var labels = data.labels;
+                            var labelCount = labels ? labels.length : 0;
+
+                            if (tooltipItems.length > 0) {
+                                var item = tooltipItems[0];
+
+                                if (item.xLabel) {
+                                    title = item.xLabel;
+                                } else if (labelCount > 0 && item.index < labelCount) {
+                                    title = labels[item.index];
+                                }
+                            }
+                            return title;
+                        },
+                        label: function (tooltipItem, data) {
+                            var datasetLabel = data.datasets[tooltipItem.datasetIndex].label || '';
+                            if (tooltipItem.yLabel > 0)
+                                return datasetLabel + ' : ' + Math.floor(tooltipItem.yLabel) + ' hrs ' +
+                                    Math.floor((tooltipItem.yLabel - Math.floor(tooltipItem.yLabel)) * 60) + ' mins';
+                        },
+                    }
+                },
+                responsive: true,
+                scales: {
+                    xAxes: [{
+                        stacked: true,
+                    }],
+                    yAxes: [{
+                        stacked: true
+                    }]
+                }
+            }
+        };
+        var ctx = $("#@canvasId").get(0).getContext("2d");
+        new Chart(ctx, config);
+    });
+</script>

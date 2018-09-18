@@ -1,0 +1,82 @@
+﻿@model Waka.Plugin.Chart.Model.ChartModel
+@{
+    Layout = null;
+    string canvasId = Guid.NewGuid().ToString();
+    string labels = Model.GetDataSetsLabel();
+    string datas = Model.GetDataSetsData();
+    string colors = Model.GetDataSetsColor();
+    string title = string.Format("{0}月份 项目汇总", DateTime.Now.Month);
+}
+
+<div>
+    <h2><strong>@(new HtmlString(title))</strong> ( <a href="/WakaTime/Project">查看所有</a> ) </h2>
+    <div style="width: 100%;margin:0 auto;">
+        <canvas id="@canvasId"></canvas>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        var ctx = $("#@canvasId").get(0).getContext("2d");
+        window.myBar = Chart.Bar(ctx, {
+            data: {
+                labels: [@(new HtmlString(labels))],
+                datasets: [{
+                    label: '累计',
+                    backgroundColor: [@(new HtmlString(colors))],
+                    data: [@(new HtmlString(datas))]
+                }]
+            },
+            options: {
+                legend: {
+                    display: false,
+                },
+                responsive: true,
+                hoverMode: 'label',
+                hoverAnimationDuration: 400,
+                stacked: false,
+                title: {
+                    display: false,
+                    text: "Chart.js Bar Chart - Multi Axis"
+                },
+                scales: {
+                    yAxes: [{
+                        type: "linear", // only linear but allow scale type registration. This allows extensions to exist solely for log scale for instance
+                        display: true,
+                        position: "left",
+                        ticks: {
+                            beginAtZero: true
+                        }
+                    }],
+                },
+                tooltips: {
+                    enabled: true,
+                    titleMarginBottom: 6,
+                    callbacks: {
+                        title: function (tooltipItems, data) {
+                            var title = '';
+                            var labels = data.labels;
+                            var labelCount = labels ? labels.length : 0;
+
+                            if (tooltipItems.length > 0) {
+                                var item = tooltipItems[0];
+
+                                if (item.xLabel) {
+                                    title = item.xLabel;
+                                } else if (labelCount > 0 && item.index < labelCount) {
+                                    title = labels[item.index];
+                                }
+                            }
+                            return title;
+                        },
+                        label: function (tooltipItem, data) {
+                            var datasetLabel = data.datasets[tooltipItem.datasetIndex].label || '';
+                            return datasetLabel + ' : ' + Math.floor(tooltipItem.yLabel) + ' hrs ' +
+                                    Math.floor((tooltipItem.yLabel - Math.floor(tooltipItem.yLabel)) * 60) + ' mins';
+                        },
+                    },
+                },
+            }
+        });
+    });
+</script>

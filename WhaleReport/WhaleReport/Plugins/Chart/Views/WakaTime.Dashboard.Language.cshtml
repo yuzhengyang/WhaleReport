@@ -1,0 +1,62 @@
+﻿@model Waka.Plugin.Chart.Model.ChartModel
+@{
+    Layout = null;
+    string canvasId = Guid.NewGuid().ToString();
+    string labels = Model.GetDataSetsLabel();
+    string datas = Model.GetDataSetsData();
+    string colors = Model.GetDataSetsColor();
+}
+<div>
+    <h2><strong> 最常用编程语言 </strong></h2>
+    <div style="width: 100%;margin:0 auto;">
+        <canvas id="@canvasId"></canvas>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        var config = {
+            type: 'pie',
+            data: {
+                datasets: [{
+                    data: [@(new HtmlString(datas))],
+                    backgroundColor: [@(new HtmlString(colors))],
+                }],
+                labels: [@(new HtmlString(labels))]
+            },
+            legend: {
+                position: 'right',
+            },
+            options: {
+                responsive: true,
+                tooltips: {
+                    enabled: true,
+                    titleMarginBottom: 0,
+                    callbacks: {
+                        title: function (tooltipItems, data) {
+                            var title = '';
+                            var labels = data.labels;
+                            var labelCount = labels ? labels.length : 0;
+
+                            if (tooltipItems.length > 0) {
+                                var item = tooltipItems[0];
+
+                                if (item.xLabel) {
+                                    title = item.xLabel;
+                                } else if (labelCount > 0 && item.index < labelCount) {
+                                    title = labels[item.index];
+                                }
+                            }
+                            return title;
+                        },
+                        label: function (tooltipItem, data) {
+                            return;
+                        },
+                    },
+                },
+            },
+        };
+        var ctx = $("#@canvasId").get(0).getContext("2d");
+        new Chart(ctx, config);
+    });
+</script>

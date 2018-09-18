@@ -1,0 +1,239 @@
+﻿@model WhaleReport.Models.ReportDataModels.ReportOptionModel
+@{
+    List<WhaleReport.Models.ReportDataModels.ReportDataSourceModel> DataSourceList = ViewBag.DataSourceList;
+    List<WhaleReport.Models.ReportDataModels.ReportOptionTypeModel> ReportOptionTypeList = ViewBag.ReportOptionTypeList;
+    int i = 0;
+}
+<!-- 按钮触发模态框 -->
+<button class="btn btn-primary btn-xs" data-toggle="modal" data-target="@(new HtmlString($"#editOptionModal{Model.Id}"))">
+    编辑
+</button>
+<!-- 模态框（Modal） -->
+<div class="modal fade" id="@(new HtmlString($"editOptionModal{Model.Id}"))" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+                <h4 class="modal-title text-left" id="myModalLabel">
+                    编辑图表
+                </h4>
+            </div>
+            @using (Html.BeginForm("EditOption", "ReportPage"))
+            {
+                <div class="modal-body">
+                    @Html.AntiForgeryToken()
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    <input type="hidden" name="Id" value="@Model.Id" />
+                    @Html.HiddenFor(model => model.ReportPageModelId)
+
+                    <div>
+                        <!-- Nav tabs -->
+                        <ul class="nav nav-tabs" role="tablist">
+                            <li role="presentation" class="active"><a href="#editBaseOption" aria-controls="editBaseOption" role="tab" data-toggle="tab"> 基础 </a></li>
+                            <li role="presentation"><a href="#editSeniorOption" aria-controls="editSeniorOption" role="tab" data-toggle="tab"> 高级 </a></li>
+                        </ul>
+                        <!-- Tab panes -->
+                        <div class="tab-content">
+                            <div role="tabpanel" class="tab-pane active" id="editBaseOption">
+                                <div class="row" style="margin-top:20px;margin-bottom:20px;">
+                                    <div class="col-md-12">
+                                        <div class="col-md-2">
+                                            @Html.LabelFor(model => model.Title, htmlAttributes: new { @class = "control-label" })
+                                        </div>
+                                        <div class="col-md-10">
+                                            @Html.EditorFor(model => model.Title, new { htmlAttributes = new { @class = "form-control" } })
+                                            @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row" style="margin-top:10px;">
+                                    <div class="col-md-12">
+                                        <div class="col-md-2">
+                                            @Html.LabelFor(model => model.Type, htmlAttributes: new { @class = "control-label" })
+                                        </div>
+                                        <div class="col-md-10">
+                                            @* @Html.EditorFor(model => model.Type, new { htmlAttributes = new { @class = "form-control" } })*@
+                                            @*@Html.ValidationMessageFor(model => model.Type, "", new { @class = "text-danger" })*@
+                                            <select class="form-control" name="Type">
+                                                @foreach (var type in ReportOptionTypeList)
+                                                {
+                                                    if (type.Type == Model.Type)
+                                                    {
+                                                <option value="@type.Type" selected="selected">@type.Name</option>
+                                                    }
+                                                    else
+                                                    {
+                                                <option value="@type.Type">@type.Name</option>
+                                                    }
+                                                }
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row" style="margin-top:10px;">
+                                    <div class="col-md-12">
+                                        <div class="col-md-2">
+                                            @Html.LabelFor(model => model.ReportDataSetModelId, htmlAttributes: new { @class = "control-label" })
+                                        </div>
+                                        <div class="col-md-10">
+                                            @* @Html.EditorFor(model => model.Type, new { htmlAttributes = new { @class = "form-control" } })*@
+                                            @*@Html.ValidationMessageFor(model => model.Type, "", new { @class = "text-danger" })*@
+                                            <select class="form-control" name="ReportDataSetModelId">
+                                                @if (DataSourceList != null)
+                                                {
+                                                    foreach (var source in DataSourceList)
+                                                    {
+                                                        if (source.ReportDataSetModels != null)
+                                                        {
+                                                            foreach (var set in source.ReportDataSetModels)
+                                                            {
+                                                                if (Model.ReportDataSetModelId == set.Id)
+                                                                {
+                                                <option value="@set.Id" selected="selected">@set.Name（@source.Name）</option>
+                                                                }
+                                                                else
+                                                                {
+                                                <option value="@set.Id">@set.Name（@source.Name）</option>
+                                                                }
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <hr />
+
+                                <div class="row" style="margin-top:10px;">
+                                    <div class="col-md-6">
+                                        <div class="col-md-4">
+                                            @Html.LabelFor(model => model.Row, htmlAttributes: new { @class = "control-label" })
+                                        </div>
+                                        <div class="col-md-8">
+                                            @Html.EditorFor(model => model.Row, new { htmlAttributes = new { @class = "form-control" } })
+                                            @Html.ValidationMessageFor(model => model.Row, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="col-md-4">
+                                            @Html.LabelFor(model => model.Column, htmlAttributes: new { @class = "control-label" })
+                                        </div>
+                                        <div class="col-md-8">
+                                            @Html.EditorFor(model => model.Column, new { htmlAttributes = new { @class = "form-control" } })
+                                            @Html.ValidationMessageFor(model => model.Column, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row" style="margin-top:10px;">
+                                    <div class="col-md-6">
+                                        <div class="col-md-4">
+                                            @Html.LabelFor(model => model.ColumnClass, htmlAttributes: new { @class = "control-label" })
+                                        </div>
+                                        <div class="col-md-8">
+                                            @Html.EditorFor(model => model.ColumnClass, new { htmlAttributes = new { @class = "form-control" } })
+                                            @Html.ValidationMessageFor(model => model.ColumnClass, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="col-md-4">
+                                            @Html.LabelFor(model => model.Height, htmlAttributes: new { @class = "control-label" })
+                                        </div>
+                                        <div class="col-md-8">
+                                            @Html.EditorFor(model => model.Height, new { htmlAttributes = new { @class = "form-control" } })
+                                            @Html.ValidationMessageFor(model => model.Height, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div role="tabpanel" class="tab-pane" id="editSeniorOption">
+                                <div class="row" style="margin-top:20px;margin-bottom:20px;">
+                                    <div class="col-md-6">
+                                        <p class="text-right text-danger">进阶设置（请谨慎驾驶）</p>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="col-md-2">
+                                            @Html.LabelFor(model => model.DataName, htmlAttributes: new { @class = "control-label" })
+                                        </div>
+                                        <div class="col-md-10">
+                                            @Html.EditorFor(model => model.DataName, new { htmlAttributes = new { @class = "form-control", placeholder = "分组定制：名称（默认为空）" } })
+                                            @Html.ValidationMessageFor(model => model.DataName, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row" style="margin-top:10px;">
+                                    <div class="col-md-12">
+                                        <div class="col-md-2">
+                                            @Html.LabelFor(model => model.DataGroup, htmlAttributes: new { @class = "control-label" })
+                                        </div>
+                                        <div class="col-md-10">
+                                            @Html.EditorFor(model => model.DataGroup, new { htmlAttributes = new { @class = "form-control", placeholder = "分组定制：分组（默认为空）" } })
+                                            @Html.ValidationMessageFor(model => model.DataGroup, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row" style="margin-top:10px;">
+                                    <div class="col-md-12">
+                                        <div class="col-md-2">
+                                            @Html.LabelFor(model => model.DataValue, htmlAttributes: new { @class = "control-label" })
+                                        </div>
+                                        <div class="col-md-10">
+                                            @Html.EditorFor(model => model.DataValue, new { htmlAttributes = new { @class = "form-control", placeholder = "分组定制：数值（默认为空）" } })
+                                            @Html.ValidationMessageFor(model => model.DataValue, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <hr />
+
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="col-md-2">
+                                            @Html.LabelFor(model => model.Dimensions, htmlAttributes: new { @class = "control-label" })
+                                        </div>
+                                        <div class="col-md-10">
+                                            @Html.EditorFor(model => model.Dimensions, new { htmlAttributes = new { @class = "form-control", placeholder = "定制数据列（默认为空）" } })
+                                            @Html.ValidationMessageFor(model => model.Dimensions, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row" style="margin-top:10px;">
+                                    <div class="col-md-12">
+                                        <div class="col-md-2">
+                                            @Html.LabelFor(model => model.SeriesType, htmlAttributes: new { @class = "control-label" })
+                                        </div>
+                                        <div class="col-md-10">
+                                            @Html.EditorFor(model => model.SeriesType, new { htmlAttributes = new { @class = "form-control", placeholder = "定制列图类型（默认为空）" } })
+                                            @Html.ValidationMessageFor(model => model.SeriesType, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <div class="form-actions no-color">
+                        <input type="submit" value="保存" class="btn btn-primary" />
+                        <input type="button" class="btn btn-warning" data-dismiss="modal" value="关闭" />
+                    </div>
+                </div>
+            }
+
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal -->
+</div>
