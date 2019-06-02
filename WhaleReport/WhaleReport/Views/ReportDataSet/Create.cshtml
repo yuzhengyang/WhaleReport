@@ -1,6 +1,6 @@
-﻿@model WhaleReport.Models.ReportDataModels.ReportDataSetModel
+﻿@model WhaleReport.Models.DBModels.ReportModels.ReportDataSetModel
 @{
-    List<WhaleReport.Models.ReportDataModels.ReportDataSourceModel> DataSourceList = ViewBag.DataSourceList;
+    List<WhaleReport.Models.DBModels.ReportModels.ReportDataSourceModel> DataSourceList = ViewBag.DataSourceList;
 }
 
 <!-- 按钮触发模态框 -->
@@ -37,7 +37,14 @@
                                         {
                                             foreach (var source in DataSourceList)
                                             {
-                                                <option value="@source.Id">@source.Name</option>
+                                                if (source.Id == Model.ReportDataSourceModelId)
+                                                {
+                                                    <option value="@source.Id" selected>@source.Name</option>
+                                                }
+                                                else
+                                                {
+                                                    <option value="@source.Id">@source.Name</option>
+                                                }
                                             }
                                         }
                                     </select>

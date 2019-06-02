@@ -15,7 +15,7 @@ namespace WhaleReport.ReportDB.MySqlUtils
         {
             ConnectionString = cs;
         }
-        public DataTable Select(string sql)
+        public DataTable Select(string sql, out int recordsAffected)
         {
             MySqlConnection conn = new MySqlConnection(ConnectionString);
             MySqlDataReader dataReader = null;
@@ -28,6 +28,7 @@ namespace WhaleReport.ReportDB.MySqlUtils
                 dataReader = command.ExecuteReader();
 
                 DataTable dt = new DataTable();
+                recordsAffected = dataReader.RecordsAffected;
                 DataTable schemaTable = dataReader.GetSchemaTable();
 
                 //动态构建表，添加列
@@ -54,6 +55,7 @@ namespace WhaleReport.ReportDB.MySqlUtils
             }
             catch (Exception e)
             {
+                recordsAffected = -1;
                 return null;
             }
             finally

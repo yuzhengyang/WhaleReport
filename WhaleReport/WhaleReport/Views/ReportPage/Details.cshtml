@@ -1,8 +1,8 @@
-﻿@model WhaleReport.Models.ReportDataModels.ReportPageModel
+﻿@model WhaleReport.Models.DBModels.ReportModels.ReportPageModel
 
 @{
     ViewBag.Title = "Details";
-    List<WhaleReport.Models.ReportDataModels.ReportOptionTypeModel> ReportOptionTypeList = ViewBag.ReportOptionTypeList;
+    List<WhaleReport.Models.AppModels.ReportModels.ReportOptionTypeModel> ReportOptionTypeList = ViewBag.ReportOptionTypeList;
 }
 
 <div class="row">
@@ -14,7 +14,7 @@
         @Html.ActionLink("返回", "Index", null, new { @class = "btn btn-warning" })
         @*@Html.ActionLink("预览", "Preview", new { id = Model.Id }, new { @class = "btn btn-success" })*@
         <a class="btn btn-info" href="~/ReportPage/Preview/@(Model.Id)" target="_blank">预览</a>
-        @Html.Partial("AddOption", new WhaleReport.Models.ReportDataModels.ReportOptionModel() { ReportPageModelId = Model.Id })
+        @Html.Partial("AddOption", new WhaleReport.Models.AppModels.ReportModels.ReportOptionModel() { ReportPageModelId = Model.Id })
     </div>
 </div>
 

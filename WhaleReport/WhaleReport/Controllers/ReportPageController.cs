@@ -5,10 +5,11 @@ using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Data;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 using WhaleReport.MainDB.DAO;
-using WhaleReport.Models.ReportDataModels;
+using WhaleReport.Models.AppModels.ReportModels;
+using WhaleReport.Models.AppModels.ResultModels;
+using WhaleReport.Models.DBModels.ReportModels;
 using WhaleReport.ReportDB.MySqlUtils;
 
 namespace WhaleReport.Controllers
@@ -27,7 +28,7 @@ namespace WhaleReport.Controllers
             IEnumerable<ReportPageModel> result = new List<ReportPageModel>();
             using (Muse db = new Muse())
             {
-                result = db.GetAll<ReportPageModel>(null, false).OrderBy(x => x.Name);
+                result = db.Gets<ReportPageModel>(x => x.CreateUser == User.Identity.Name, null).OrderBy(x => x.Name);
             }
             return View(result);
         }
@@ -43,7 +44,7 @@ namespace WhaleReport.Controllers
                         "ReportOptionModels.ReportDataSetModel.ReportDataSourceModel" });
                 record.ReportOptionModels = record.ReportOptionModels.OrderBy(x => x.Row).ThenBy(x => x.Column).ToList();
 
-                List<ReportDataSourceModel> DataSourceList = db.GetAll<ReportDataSourceModel>(new[] { "ReportDataSetModels" }, false).ToList();
+                List<ReportDataSourceModel> DataSourceList = db.Gets<ReportDataSourceModel>(x => x.CreateUser == User.Identity.Name, new[] { "ReportDataSetModels" }).ToList();
                 ViewBag.DataSourceList = DataSourceList;
                 ViewBag.ReportOptionTypeList = ReportOptionTypeList;
                 return View(record);
@@ -71,8 +72,8 @@ namespace WhaleReport.Controllers
                         string sql = option.ReportDataSetModel.Sql;
 
                         MySqlHelper msHelper = new MySqlHelper(cs);
-                        DataTable dt = msHelper.Select(sql);
-                        if (Str.Ok(option.DataName) && Str.Ok(option.DataGroup) && Str.Ok(option.DataValue))
+                        DataTable dt = msHelper.Select(sql, out int recordsAffected);
+                        if (Str.Ok(option.DataName, option.DataGroup, option.DataValue))
                         {
                             dt = msHelper.Group(dt, option.DataName, option.DataValue, option.DataGroup);
                         }
@@ -98,6 +99,7 @@ namespace WhaleReport.Controllers
             using (Muse db = new Muse())
             {
                 model.Id = Guid.NewGuid();
+                model.CreateUser = User.Identity.Name;
 
                 int flag = db.Add(model, true);
                 if (flag > 0)
@@ -199,6 +201,67 @@ namespace WhaleReport.Controllers
                 {
                     return View();
                 }
+            }
+        }
+
+        public JsonResult SetShare(Guid id)
+        {
+            Rs rs = Rs.Ok("共享成功");
+            using (Muse db = new Muse())
+            {
+                var record = db.Get<ReportPageModel>(x => x.Id == id && id != Guid.Empty, null);
+                record.ShareId = Guid.NewGuid();
+                if (db.Update(record, true) > 0)
+                {
+                    rs.Add("record", record);
+                }
+                else
+                {
+                    rs = Rs.Error("共享失败");
+                    rs.Add("record", record);
+                }
+                return Json(rs, JsonRequestBehavior.AllowGet);
+            }
+
+        }
+
+        [AllowAnonymous]
+        public ActionResult Share(Guid id)
+        {
+            using (Muse db = new Muse())
+            {
+                //验证共享ID是否正确
+                var record = db.Get<ReportPageModel>(x => x.ShareId == id && id != Guid.Empty,
+                    new[] { "ReportOptionModels",
+                        "ReportOptionModels.ReportDataSetModel",
+                        "ReportOptionModels.ReportDataSetModel.ReportDataSourceModel" });
+
+                if (record != null && Ls.Ok(record.ReportOptionModels))
+                {
+                    List<ReportModel> ReportModels = new List<ReportModel>();
+                    foreach (var option in record.ReportOptionModels)
+                    {
+                        string cs = option.ReportDataSetModel.ReportDataSourceModel.ConnectionString;
+                        string sql = option.ReportDataSetModel.Sql;
+
+                        MySqlHelper msHelper = new MySqlHelper(cs);
+                        DataTable dt = msHelper.Select(sql, out int recordsAffected);
+                        if (Str.Ok(option.DataName, option.DataGroup, option.DataValue))
+                        {
+                            dt = msHelper.Group(dt, option.DataName, option.DataValue, option.DataGroup);
+                        }
+
+                        ReportModels.Add(new ReportModel()
+                        {
+                            DataTable = dt,
+                            ReportOptionModel = option,
+                        });
+                    }
+                    ReportModels = ReportModels.OrderBy(x => x.ReportOptionModel.Row).ThenBy(x => x.ReportOptionModel.Column).ToList();
+                    ViewBag.ReportModels = ReportModels;
+                }
+
+                return View(record);
             }
         }
     }

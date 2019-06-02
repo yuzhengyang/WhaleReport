@@ -7,7 +7,8 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using WhaleReport.MainDB.DAO;
-using WhaleReport.Models.ReportDataModels;
+using WhaleReport.Models.AppModels.ReportModels;
+using WhaleReport.Models.DBModels.ReportModels;
 using WhaleReport.ReportDB.MySqlUtils;
 
 namespace WhaleReport.Controllers
@@ -28,7 +29,7 @@ namespace WhaleReport.Controllers
                     string sql = source.ReportDataSetModels.First().Sql;
 
                     MySqlHelper msHelper = new MySqlHelper(cs);
-                    DataTable a = msHelper.Select(sql);
+                    DataTable a = msHelper.Select(sql, out int recordsAffected);
                     ReportModel ri = new ReportModel()
                     {
                         DataTable = a,

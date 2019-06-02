@@ -1,5 +1,6 @@
 ﻿using System.Web;
 using System.Web.Mvc;
+using WhaleReport.Modules.AuthorizeModule;
 
 namespace WhaleReport
 {
@@ -8,7 +9,7 @@ namespace WhaleReport
         public static void RegisterGlobalFilters(GlobalFilterCollection filters)
         {
             filters.Add(new HandleErrorAttribute());
-            //filters.Add(new Authorize());
+            filters.Add(new Authorize());
         }
     }
 }

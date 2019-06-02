@@ -1,16 +1,61 @@
-﻿@model IEnumerable<WhaleReport.Models.ReportDataModels.ReportDataSetModel>
+﻿@model IEnumerable<WhaleReport.Models.DBModels.ReportModels.ReportDataSetModel>
 
 @{
     ViewBag.Title = "数据集合";
 }
 
+<script type="text/javascript">
+    function share(id, shareid) {
+        $.ajax({
+            type: "POST",
+            url: "/ReportDataSet/SetShare",
+            data: { id: id },
+            success: function (data) {
+                $('#toast_modal').modal();
+                $("#" + shareid).val(data.record.ShareId);
+            }
+        });
+    }
+    function table(id) {
+        var host = window.location.host;
+        var share_id = $("#" + id).val();
+        console.log("ReportDataSet-Table");
+        window.open(host + "/ReportDataSet/Table/" + share_id);
+        //window.open(host + "/ReportDataSet/Table/" + share_id);
+    }
+
+    function copy(shareid, eleid) {
+        new ClipboardJS('#' + eleid, {
+            text: function () {
+                var host = window.location.host;
+                return host + "/ReportDataSet/Table/" + shareid;
+            }
+        });
+
+        //clipboard.on('success', function (e) {
+        //    alert("复制成功");
+        //});
+        //clipboard.on('error', function (e) {
+        //    alert("复制失败");
+        //});
+    }
+    function copy_api(shareid, eleid) {
+        new ClipboardJS('#' + eleid, {
+            text: function () {
+                var host = window.location.host;
+                return host + "/api/ReportDataSetApi/Share/" + shareid;
+            }
+        });
+    }
+</script>
+
 <p class="text-center h4"><strong>数据集合</strong></p>
 
 <p class="text-right">
     <button class="btn btn-primary" data-toggle="modal" data-target="@(new HtmlString($"#addModal"))">
-        + 添加数据源
+        + 添加数据集合
     </button>
-    @Html.Partial("Create", new WhaleReport.Models.ReportDataModels.ReportDataSetModel())
+    @Html.Partial("Create", new WhaleReport.Models.DBModels.ReportModels.ReportDataSetModel())
     @*@Html.ActionLink("+ 添加数据集合", "Create", null, new { @class = "btn btn-primary" })*@
 </p>
 <table class="table">
@@ -52,14 +97,37 @@
                 <button class="btn btn-primary btn-xs" data-toggle="modal" data-target="@(new HtmlString($"#detailsModal{item.Id}"))">
                     详情
                 </button>
-                <button class="btn btn-danger btn-xs" data-toggle="modal" data-target="@(new HtmlString($"#deleteModal{item.Id}"))">
+                <button class="btn btn-danger btn-xs" data-toggle="modal" data-target="@(new HtmlString($" #deleteModal{item.Id}"))">
                     删除
                 </button>
+
+                <div class="btn-group">
+                    <button type="button" class="btn btn-warning btn-xs dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        分享 <span class="caret"></span>
+                    </button>
+                    <input hidden id="share-@item.Id" value="@item.ShareId" />
+                    <ul class="dropdown-menu">
+                        @if (item.ShareId == Guid.Empty)
+                        {
+                            <li><a href="#" onclick="share('@item.Id')">创建分享</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li><a href="#">暂未分享</a></li>
+                        }
+                        else
+                        {
+                            <li><a href="#" onclick="share('@item.Id','share-@item.Id')">更新分享（原分享将失效）</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li><a href="#" onclick="table('share-@item.Id')">查看分享表格</a></li>
+                            <li><a id="copy-@item.Id" href="#" onclick="copy('@item.ShareId','copy-@item.Id')">复制分享地址</a></li>
+                            <li><a id="copy-@item.Id" href="#" onclick="copy_api('@item.ShareId','copy-@item.Id')">复制分享接口</a></li>
+                        }
+                    </ul>
+                </div>
+
                 @Html.Partial("Edit", item)
                 @Html.Partial("Details", item)
                 @Html.Partial("Delete", item)
 
-                @*@Html.ActionLink("编辑", "Edit", new { id = item.Id }, new { @class = "btn btn-warning btn-xs" })*@
                 @*@Html.ActionLink("详情", "Details", new { id = item.Id }, new { @class = "btn btn-primary btn-xs" })*@
                 @*@Html.ActionLink("删除", "Delete", new { id = item.Id }, new { @class = "btn btn-danger btn-xs" })*@
             </td>
@@ -67,3 +135,11 @@
     }
 
 </table>
+
+<div id="toast_modal" class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+    <div class="modal-dialog modal-sm" role="document">
+        <div class="modal-content">
+            <div style="margin:10px;padding:10px;">分享成功</div>
+        </div>
+    </div>
+</div>

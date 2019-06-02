@@ -1,10 +1,17 @@
-﻿using System;
+﻿using Azylee.Core.DataUtils.StringUtils;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
+using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Security;
 using WhaleReport.MainDB.DAO;
-using WhaleReport.Models.ReportDataModels;
+using WhaleReport.Models;
+using WhaleReport.Models.DBModels.ReportModels;
+using WhaleReport.ReportDB.MySqlUtils;
 
 namespace WhaleReport.Controllers
 {
@@ -16,7 +23,7 @@ namespace WhaleReport.Controllers
             IEnumerable<ReportDataSourceModel> result = new List<ReportDataSourceModel>();
             using (Muse db = new Muse())
             {
-                result = db.GetAll<ReportDataSourceModel>(null, false);
+                result = db.Gets<ReportDataSourceModel>(x => x.CreateUser == User.Identity.Name, null);
             }
             return View(result);
         }
@@ -26,7 +33,7 @@ namespace WhaleReport.Controllers
         {
             using (Muse db = new Muse())
             {
-                var record = db.Get<ReportDataSourceModel>(x => x.Id == id, null);
+                var record = db.Get<ReportDataSourceModel>(x => x.Id == id && x.CreateUser == User.Identity.Name, null);
                 return View(record);
             }
         }
@@ -44,6 +51,7 @@ namespace WhaleReport.Controllers
             using (Muse db = new Muse())
             {
                 model.Id = Guid.NewGuid();
+                model.CreateUser = User.Identity.Name;
 
                 int flag = db.Add(model, true);
                 if (flag > 0)

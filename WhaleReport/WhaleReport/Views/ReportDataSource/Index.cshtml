@@ -1,4 +1,4 @@
-﻿@model IEnumerable<WhaleReport.Models.ReportDataModels.ReportDataSourceModel>
+﻿@model IEnumerable<WhaleReport.Models.DBModels.ReportModels.ReportDataSourceModel>
 
 @{
     ViewBag.Title = "数据源";
@@ -8,7 +8,7 @@
 
 <p class="text-right">
     @*@Html.ActionLink("+ 添加数据源", "Create", null, new { @class = "btn btn-primary" })*@
-    @Html.Partial("Create", new WhaleReport.Models.ReportDataModels.ReportDataSourceModel())
+    @Html.Partial("Create", new WhaleReport.Models.DBModels.ReportModels.ReportDataSourceModel())
 </p>
 <table class="table">
     <tr>

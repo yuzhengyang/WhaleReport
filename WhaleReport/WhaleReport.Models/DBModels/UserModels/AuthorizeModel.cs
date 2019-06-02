@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace WhaleReport.Models.UserModels
+namespace WhaleReport.Models.DBModels.UserModels
 {
     public class AuthorizeModel
     {
@@ -23,20 +23,14 @@ namespace WhaleReport.Models.UserModels
         /// <summary>
         /// 所需权限
         /// </summary>
-        public string Roles { get; set; }
+        public string Role { get; set; }
         /// <summary>
-        /// 功能禁用
+        /// 功能可用
         /// </summary>
-        public bool IsForbidden { get; set; }
+        public bool IsEnable { get; set; }
         /// <summary>
-        /// 需要登录
+        /// 允许匿名（允许不登录）
         /// </summary>
-        public bool IsLogin { get; set; }
-        public string[] GetRoles()
-        {
-            if (Roles != null)
-                return Roles.Split(',');
-            return null;
-        }
+        public bool AllowAnonymous { get; set; }
     }
 }

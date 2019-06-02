@@ -43,17 +43,19 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ReportDataModels\ReportDataSetModel.cs" />
-    <Compile Include="ReportDataModels\ReportDataSourceModel.cs" />
+    <Compile Include="AppModels\ResultModels\Rs.cs" />
+    <Compile Include="DBModels\ReportModels\ReportDataSetModel.cs" />
+    <Compile Include="DBModels\ReportModels\ReportDataSourceModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ReportDataModels\ReportModel.cs" />
-    <Compile Include="ReportDataModels\ReportOptionModel.cs" />
-    <Compile Include="ReportDataModels\ReportOptionTypeModel.cs" />
-    <Compile Include="ReportDataModels\ReportPageModel.cs" />
-    <Compile Include="UserModels\AuthorizeModel.cs" />
+    <Compile Include="AppModels\ReportModels\ReportModel.cs" />
+    <Compile Include="AppModels\ReportModels\ReportOptionModel.cs" />
+    <Compile Include="AppModels\ReportModels\ReportOptionTypeModel.cs" />
+    <Compile Include="DBModels\ReportModels\ReportPageModel.cs" />
+    <Compile Include="DBModels\UserModels\AuthorizeModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

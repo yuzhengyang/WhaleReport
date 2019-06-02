@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace WhaleReport.Models.ReportDataModels
+namespace WhaleReport.Models.AppModels.ReportModels
 {
     public class ReportModel
     {

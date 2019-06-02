@@ -1,11 +1,11 @@
-﻿@model WhaleReport.Models.ReportDataModels.ReportOptionModel
+﻿@model WhaleReport.Models.AppModels.ReportModels.ReportOptionModel
 @{
     Model.Row = 1;
     Model.Column = 1;
     Model.ColumnClass = "col-md-6";
     Model.Height = 350;
-    List<WhaleReport.Models.ReportDataModels.ReportDataSourceModel> DataSourceList = ViewBag.DataSourceList;
-    List<WhaleReport.Models.ReportDataModels.ReportOptionTypeModel> ReportOptionTypeList = ViewBag.ReportOptionTypeList;
+    List<WhaleReport.Models.DBModels.ReportModels.ReportDataSourceModel> DataSourceList = ViewBag.DataSourceList;
+    List<WhaleReport.Models.AppModels.ReportModels.ReportOptionTypeModel> ReportOptionTypeList = ViewBag.ReportOptionTypeList;
     int i = 0;
 }
 <!-- 按钮触发模态框 -->

@@ -1,4 +1,4 @@
-﻿@model WhaleReport.Models.ReportDataModels.ReportPageModel
+﻿@model WhaleReport.Models.DBModels.ReportModels.ReportPageModel
 
 <!-- 按钮触发模态框 -->
 <button class="btn btn-warning btn-xs" data-toggle="modal" data-target="@(new HtmlString($"#editModal{Model.Id}"))">
@@ -25,6 +25,8 @@
                         <div class="form-horizontal">
                             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                             @Html.HiddenFor(model => model.Id)
+                            @Html.HiddenFor(model => model.CreateUser)
+                            @Html.HiddenFor(model => model.ShareId)
 
                             <div class="form-group">
                                 @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })

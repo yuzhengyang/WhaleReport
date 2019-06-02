@@ -1,4 +1,4 @@
-﻿@model IEnumerable<WhaleReport.Models.ReportDataModels.ReportPageModel>
+﻿@model IEnumerable<WhaleReport.Models.DBModels.ReportModels.ReportPageModel>
 
 @{
     ViewBag.Title = "Index";
@@ -7,7 +7,7 @@
 <h2>Index</h2>
 
 <p>
-    @Html.Partial("Create", new WhaleReport.Models.ReportDataModels.ReportPageModel())
+    @Html.Partial("Create", new WhaleReport.Models.DBModels.ReportModels.ReportPageModel())
     @*@Html.ActionLink("+ 添加报表", "Create", null, new { @class = "btn btn-primary" })*@
 </p>
 <table class="table">

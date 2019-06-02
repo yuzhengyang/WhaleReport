@@ -1,5 +1,6 @@
 ﻿using System.Data.Entity;
-using WhaleReport.Models.ReportDataModels;
+using WhaleReport.Models.DBModels.ReportModels;
+using WhaleReport.Models.DBModels.UserModels;
 
 namespace WhaleReport.MainDB.DAO
 {
@@ -13,6 +14,7 @@ namespace WhaleReport.MainDB.DAO
         public DbSet<ReportDataSetModel> ReportDataSet { get; set; }
         public DbSet<ReportDataSourceModel> ReportDataSource { get; set; }
         public DbSet<ReportPageModel> ReportPage { get; set; }
+        public DbSet<AuthorizeModel> Authorize { get; set; }
         //public DbSet<RequestAuths> RequestAuths { get; set; }
         //public DbSet<Heartbeats> Heartbeats { get; set; }
         #endregion
