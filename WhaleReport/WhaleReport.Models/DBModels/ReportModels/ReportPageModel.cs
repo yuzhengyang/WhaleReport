@@ -16,8 +16,9 @@ namespace WhaleReport.Models.DBModels.ReportModels
         public string Name { get; set; }
         [DisplayName("报表描述")]
         public string Description { get; set; }
-        public List<ReportOptionModel> ReportOptionModels { get; set; }
+        public List<ReportOptionModel> ReportOptions { get; set; }
         public string CreateUser { get; set; }
         public Guid ShareId { get; set; }
+        public List<ReportPageShareModel> ReportPageShares { get; set; }
     }
 }

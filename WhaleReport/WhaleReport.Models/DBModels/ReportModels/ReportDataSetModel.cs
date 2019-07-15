@@ -34,8 +34,9 @@ namespace WhaleReport.Models.DBModels.ReportModels
         /// </summary>
         [DisplayName("查询语句")]
         public string Sql { get; set; }
-        public List<ReportOptionModel> ReportOptionModels { get; set; }
+        public List<ReportOptionModel> ReportOptions { get; set; }
         public string  CreateUser { get; set; }
         public Guid ShareId { get; set; }
+        public List<ReportDataSetShareModel> ReportDataSetShares { get; set; }
     }
 }

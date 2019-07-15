@@ -35,7 +35,8 @@ namespace WhaleReport.Models.DBModels.ReportModels
         /// </summary>
         [DisplayName("连接字符串")]
         public string ConnectionString { get; set; }
-        public List<ReportDataSetModel> ReportDataSetModels { get; set; }
+        public List<ReportDataSetModel> ReportDataSets { get; set; }
         public string CreateUser { get; set; }
+        public List<ReportDataSourceShareModel> ReportDataSourceShares { get; set; }
     }
 }

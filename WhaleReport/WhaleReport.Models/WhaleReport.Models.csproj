@@ -45,10 +45,13 @@
   <ItemGroup>
     <Compile Include="AppModels\ResultModels\Rs.cs" />
     <Compile Include="DBModels\ReportModels\ReportDataSetModel.cs" />
+    <Compile Include="DBModels\ReportModels\ReportDataSetShareModel.cs" />
     <Compile Include="DBModels\ReportModels\ReportDataSourceModel.cs" />
+    <Compile Include="DBModels\ReportModels\ReportDataSourceShareModel.cs" />
+    <Compile Include="DBModels\ReportModels\ReportPageShareModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="AppModels\ReportModels\ReportModel.cs" />
-    <Compile Include="AppModels\ReportModels\ReportOptionModel.cs" />
+    <Compile Include="DBModels\ReportModels\ReportOptionModel.cs" />
     <Compile Include="AppModels\ReportModels\ReportOptionTypeModel.cs" />
     <Compile Include="DBModels\ReportModels\ReportPageModel.cs" />
     <Compile Include="DBModels\UserModels\AuthorizeModel.cs" />

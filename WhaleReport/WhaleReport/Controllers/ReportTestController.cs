@@ -26,14 +26,14 @@ namespace WhaleReport.Controllers
                 {
                     var source = sources.First();
                     string cs = source.ConnectionString;
-                    string sql = source.ReportDataSetModels.First().Sql;
+                    string sql = source.ReportDataSets.First().Sql;
 
                     MySqlHelper msHelper = new MySqlHelper(cs);
                     DataTable a = msHelper.Select(sql, out int recordsAffected);
                     ReportModel ri = new ReportModel()
                     {
                         DataTable = a,
-                        ReportOptionModel = new ReportOptionModel()
+                        ReportOption = new ReportOptionModel()
                         {
                             Title = "标题XXXXXX",
                             Type = "ECharts.BasicLineChart",

@@ -12,11 +12,13 @@ namespace WhaleReport.MainDB.DAO
 
         #region 数据库表
         public DbSet<ReportDataSetModel> ReportDataSet { get; set; }
+        public DbSet<ReportDataSetShareModel> ReportDataSetShare { get; set; }
         public DbSet<ReportDataSourceModel> ReportDataSource { get; set; }
+        public DbSet<ReportDataSourceShareModel> ReportDataSourceShare { get; set; }
         public DbSet<ReportPageModel> ReportPage { get; set; }
+        public DbSet<ReportPageShareModel> ReportPageShare { get; set; }
+        public DbSet<ReportOptionModel> ReportOption { get; set; }
         public DbSet<AuthorizeModel> Authorize { get; set; }
-        //public DbSet<RequestAuths> RequestAuths { get; set; }
-        //public DbSet<Heartbeats> Heartbeats { get; set; }
         #endregion
 
 

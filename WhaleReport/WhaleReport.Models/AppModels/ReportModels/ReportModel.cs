@@ -5,6 +5,7 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using WhaleReport.Models.DBModels.ReportModels;
 
 namespace WhaleReport.Models.AppModels.ReportModels
 {
@@ -29,6 +30,6 @@ namespace WhaleReport.Models.AppModels.ReportModels
             }
             return dim.ToArray();
         }
-        public ReportOptionModel ReportOptionModel { get; set; }
+        public ReportOptionModel ReportOption { get; set; }
     }
 }

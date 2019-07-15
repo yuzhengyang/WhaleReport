@@ -42,7 +42,7 @@ namespace WhaleReport.Controllers
                     new[] { "ReportOptionModels",
                         "ReportOptionModels.ReportDataSetModel",
                         "ReportOptionModels.ReportDataSetModel.ReportDataSourceModel" });
-                record.ReportOptionModels = record.ReportOptionModels.OrderBy(x => x.Row).ThenBy(x => x.Column).ToList();
+                record.ReportOptions = record.ReportOptions.OrderBy(x => x.Row).ThenBy(x => x.Column).ToList();
 
                 List<ReportDataSourceModel> DataSourceList = db.Gets<ReportDataSourceModel>(x => x.CreateUser == User.Identity.Name, new[] { "ReportDataSetModels" }).ToList();
                 ViewBag.DataSourceList = DataSourceList;
@@ -64,9 +64,9 @@ namespace WhaleReport.Controllers
                         "ReportOptionModels.ReportDataSetModel",
                         "ReportOptionModels.ReportDataSetModel.ReportDataSourceModel" });
 
-                if (record != null && Ls.Ok(record.ReportOptionModels))
+                if (record != null && Ls.Ok(record.ReportOptions))
                 {
-                    foreach (var option in record.ReportOptionModels)
+                    foreach (var option in record.ReportOptions)
                     {
                         string cs = option.ReportDataSetModel.ReportDataSourceModel.ConnectionString;
                         string sql = option.ReportDataSetModel.Sql;
@@ -81,10 +81,10 @@ namespace WhaleReport.Controllers
                         ReportModels.Add(new ReportModel()
                         {
                             DataTable = dt,
-                            ReportOptionModel = option,
+                            ReportOption = option,
                         });
                     }
-                    ReportModels = ReportModels.OrderBy(x => x.ReportOptionModel.Row).ThenBy(x => x.ReportOptionModel.Column).ToList();
+                    ReportModels = ReportModels.OrderBy(x => x.ReportOption.Row).ThenBy(x => x.ReportOption.Column).ToList();
                     ViewBag.ReportModels = ReportModels;
                 }
 
@@ -236,10 +236,10 @@ namespace WhaleReport.Controllers
                         "ReportOptionModels.ReportDataSetModel",
                         "ReportOptionModels.ReportDataSetModel.ReportDataSourceModel" });
 
-                if (record != null && Ls.Ok(record.ReportOptionModels))
+                if (record != null && Ls.Ok(record.ReportOptions))
                 {
                     List<ReportModel> ReportModels = new List<ReportModel>();
-                    foreach (var option in record.ReportOptionModels)
+                    foreach (var option in record.ReportOptions)
                     {
                         string cs = option.ReportDataSetModel.ReportDataSourceModel.ConnectionString;
                         string sql = option.ReportDataSetModel.Sql;
@@ -254,10 +254,10 @@ namespace WhaleReport.Controllers
                         ReportModels.Add(new ReportModel()
                         {
                             DataTable = dt,
-                            ReportOptionModel = option,
+                            ReportOption = option,
                         });
                     }
-                    ReportModels = ReportModels.OrderBy(x => x.ReportOptionModel.Row).ThenBy(x => x.ReportOptionModel.Column).ToList();
+                    ReportModels = ReportModels.OrderBy(x => x.ReportOption.Row).ThenBy(x => x.ReportOption.Column).ToList();
                     ViewBag.ReportModels = ReportModels;
                 }
 

@@ -1,13 +1,7 @@
-﻿using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using WhaleReport.Models.DBModels.ReportModels;
 
-namespace WhaleReport.Models.AppModels.ReportModels
+namespace WhaleReport.Models.DBModels.ReportModels
 {
     public class ReportOptionModel
     {
